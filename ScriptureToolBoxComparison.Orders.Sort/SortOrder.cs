@@ -78,11 +78,35 @@ namespace ScriptureToolBoxComparison
 			}
 
 			document.WriteNormal(builder.ToString());
-
+			wrote = Wrote.Normal;
 		}
 
 		private void WriteOrdered()
 		{
+			WriteDelete();
+		}
+
+		private void WriteDelete()
+		{
+			if (!deletes.TryDequeue(out var value))
+			{
+				return;
+			}
+			if (wrote != Wrote.Delete)
+			{
+				builder.Append(' ');
+			}
+			while (true)
+			{
+				builder.Append(value.Value, value.Offset, value.Length);
+				if (!deletes.TryDequeue(out value))
+				{
+					document.WriteDelete(builder.ToString());
+					builder.Clear();
+					return;
+				}
+				builder.Append(' ');
+			}
 		}
 	}
 }
