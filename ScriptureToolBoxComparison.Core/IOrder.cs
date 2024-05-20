@@ -7,8 +7,6 @@ namespace ScriptureToolBoxComparison
 	public interface IOrder
 	{
 		void SetDocument(IDocument document);
-		void BookStart(Book book);
-		void BookFinish();
 		void ChapterStart(Chapter chapter);
 		void ChapterFinish();
 		void WriteDelete(string value, int offset, int length);

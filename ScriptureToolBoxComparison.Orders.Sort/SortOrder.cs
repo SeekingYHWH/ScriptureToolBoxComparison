@@ -21,14 +21,6 @@ namespace ScriptureToolBoxComparison
 			this.document = document;
 		}
 
-		public void BookStart(Book book)
-		{
-		}
-
-		public void BookFinish()
-		{
-		}
-
 		public void ChapterStart(Chapter chapter)
 		{
 			builder.Clear();

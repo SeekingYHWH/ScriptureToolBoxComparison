@@ -120,7 +120,6 @@ namespace ScriptureToolBoxComparison
 				{
 					var book = books[b];
 					document.BookStart(book);
-					order.BookStart(book);
 					var chapters = book.Chapters;
 					for (var c = 0; c < chapters.Length; ++c)
 					{
@@ -135,7 +134,6 @@ namespace ScriptureToolBoxComparison
 						order.ChapterFinish();
 						document.ChapterFinish();
 					}
-					order.BookFinish();
 					document.BookFinish();
 				}
 			}
