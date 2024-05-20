@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Documents.Null", "ScriptureToolBoxComparison.Documents.Null\ScriptureToolBoxComparison.Documents.Null.csproj", "{A756A2F6-2262-4633-9961-68E23B50CDFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Orders.Original", "ScriptureToolBoxComparison.Orders.Original\ScriptureToolBoxComparison.Orders.Original.csproj", "{30A07A22-D304-4224-BE6D-930D3F0A1BBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A756A2F6-2262-4633-9961-68E23B50CDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A756A2F6-2262-4633-9961-68E23B50CDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A756A2F6-2262-4633-9961-68E23B50CDFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30A07A22-D304-4224-BE6D-930D3F0A1BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30A07A22-D304-4224-BE6D-930D3F0A1BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30A07A22-D304-4224-BE6D-930D3F0A1BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30A07A22-D304-4224-BE6D-930D3F0A1BBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
