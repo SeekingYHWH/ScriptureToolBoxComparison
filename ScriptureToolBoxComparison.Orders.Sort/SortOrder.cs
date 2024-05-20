@@ -103,6 +103,7 @@ namespace ScriptureToolBoxComparison
 				{
 					document.WriteDelete(builder.ToString());
 					builder.Clear();
+					wrote = Wrote.Delete;
 					return;
 				}
 				builder.Append(' ');
