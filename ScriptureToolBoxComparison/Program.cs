@@ -26,13 +26,11 @@ namespace ScriptureToolBoxComparison
 		#endregion //Main
 
 		#region Fields
-		private static HttpClient client;
 		private static Uri server = new Uri("https://scripturetoolbox.com/html/ic/");
-		private static IDocument? document = new NullDocument();
+		private static HttpClient client;
+		private static IDocument document = new NullDocument();
+		private static IOrder order = new OriginalOrder();
 		private static readonly List<Book> books = new List<Book>();
-
-		private static readonly StringBuilder builder = new StringBuilder();
-		private static Wrote wrote;
 		#endregion //Fields
 
 		#region Methods
@@ -43,10 +41,10 @@ namespace ScriptureToolBoxComparison
 			return null;
 		}
 
-		private static void ParseLoadBooks(string path)
+		private static void ParseLoadBooks(string configPath)
 		{
 			var doc = new XmlDocument();
-			doc.Load(path);
+			doc.Load(configPath);
 			var config = doc.DocumentElement;
 			var chapters = new List<Chapter>();
 			foreach (XmlNode bookConfig in config.SelectNodes("Book"))
@@ -89,6 +87,7 @@ namespace ScriptureToolBoxComparison
 			Console.Title = "ScriptureToolBoxComparison";
 
 			PrepareClient();
+			PrepareOrder();
 
 			GC.Collect();
 		}
@@ -108,6 +107,11 @@ namespace ScriptureToolBoxComparison
 			headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
 		}
 
+		private static void PrepareOrder()
+		{
+			order.SetDocument(document);
+		}
+
 		private static int Run()
 		{
 			try
@@ -116,18 +120,22 @@ namespace ScriptureToolBoxComparison
 				{
 					var book = books[b];
 					document.BookStart(book);
+					order.BookStart(book);
 					var chapters = book.Chapters;
 					for (var c = 0; c < chapters.Length; ++c)
 					{
 						var chapter = chapters[c];
 						document.ChapterStart(chapter);
+						order.ChapterStart(chapter);
 						using (var readerStream = client.GetStreamAsync(chapter.Source).Result)
 						using (var reader = new StreamReader(readerStream))
 						{
 							ParseChapter(reader);
 						}
+						order.ChapterFinish();
 						document.ChapterFinish();
 					}
+					order.BookFinish();
 					document.BookFinish();
 				}
 			}
@@ -145,15 +153,10 @@ namespace ScriptureToolBoxComparison
 
 		private static void ParseChapter(StreamReader reader)
 		{
-			string? line;
-
-			builder.Clear();
-			wrote = Wrote.None;
-
 			while (true)
 			{
 				//line
-				line = reader.ReadLine();
+				var line = reader.ReadLine();
 				if (line == null)
 				{
 					return;
@@ -296,33 +299,8 @@ namespace ScriptureToolBoxComparison
 					return;
 				}
 			}
-			//State
-			switch (wrote)
-			{
-			default:
-				wrote = Wrote.Delete;
-				break;
-
-			case Wrote.Delete:
-				builder.Append(' ');
-				break;
-
-			case Wrote.Insert:
-				document!.WriteInsert(builder.ToString());
-				builder.Clear();
-				document!.WriteNormal(" ");
-				wrote = Wrote.Delete;
-				break;
-
-			case Wrote.Normal:
-				document!.WriteNormal(builder.ToString());
-				builder.Clear();
-				document!.WriteNormal(" ");
-				wrote = Wrote.Delete;
-				break;
-			}
-			//Append
-			builder.Append(value, offset, length);
+			//WriteDelete
+			order.WriteDelete(value, offset, length);
 		}
 
 		private static void WriteInsert(string value, int offset, int length)
@@ -346,33 +324,8 @@ namespace ScriptureToolBoxComparison
 					return;
 				}
 			}
-			//State
-			switch (wrote)
-			{
-			default:
-				wrote = Wrote.Insert;
-				break;
-
-			case Wrote.Delete:
-				document!.WriteDelete(builder.ToString());
-				builder.Clear();
-				document!.WriteNormal(" ");
-				wrote = Wrote.Insert;
-				break;
-
-			case Wrote.Insert:
-				builder.Append(' ');
-				break;
-
-			case Wrote.Normal:
-				document!.WriteNormal(builder.ToString());
-				builder.Clear();
-				document!.WriteNormal(" ");
-				wrote = Wrote.Insert;
-				break;
-			}
-			//Append
-			builder.Append(value, offset, length);
+			//WriteInsert
+			order.WriteInsert(value, offset, length);
 		}
 
 		private static void WriteNormal(string value, int offset, int length)
@@ -396,33 +349,8 @@ namespace ScriptureToolBoxComparison
 					return;
 				}
 			}
-			//State
-			switch (wrote)
-			{
-			default:
-				wrote = Wrote.Normal;
-				break;
-
-			case Wrote.Delete:
-				document!.WriteDelete(builder.ToString());
-				builder.Clear();
-				wrote = Wrote.Normal;
-				builder.Append(' ');
-				break;
-
-			case Wrote.Insert:
-				document!.WriteInsert(builder.ToString());
-				builder.Clear();
-				wrote = Wrote.Normal;
-				builder.Append(' ');
-				break;
-
-			case Wrote.Normal:
-				builder.Append(' ');
-				break;
-			}
-			//Append
-			builder.Append(value, offset, length);
+			//WriteNormal
+			order.WriteNormal(value, offset, length);
 		}
 		#endregion //Methods
 	}
