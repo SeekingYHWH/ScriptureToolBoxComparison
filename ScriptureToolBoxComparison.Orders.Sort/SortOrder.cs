@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ScriptureToolBoxComparison
@@ -31,25 +32,39 @@ namespace ScriptureToolBoxComparison
 
 		public void ChapterFinish()
 		{
-			throw new NotImplementedException();
+			//Delete
+			WriteDelete();
+			//Insert
+			WriteInsert();
+			//Normal
+			document.WriteNormal(builder.ToString());
+			builder.Clear();
+			wrote = Wrote.Normal;
 		}
 
 		public void WriteDelete(string value, int offset, int length)
 		{
+			//Normal
 			WriteNormal();
+			//Delete
 			deletes.Enqueue(new Segment(value, offset, length));
 		}
 
 		public void WriteInsert(string value, int offset, int length)
 		{
+			//Normal
 			WriteNormal();
+			//Insert
 			inserts.Enqueue(new Segment(value, offset, length));
 		}
 
 		public void WriteNormal(string value, int offset, int length)
 		{
-			//State
-			switch (wrote)
+			//Sort
+			WriteDelete();
+			WriteInsert();
+            //State
+            switch (wrote)
 			{
 			default:
 				wrote = Wrote.Normal;
@@ -57,7 +72,6 @@ namespace ScriptureToolBoxComparison
 
 			case Wrote.Delete:
 			case Wrote.Insert:
-				WriteOrdered();
 				builder.Append(' ');
 				wrote = Wrote.Normal;
 				break;
@@ -70,21 +84,15 @@ namespace ScriptureToolBoxComparison
 			builder.Append(value, offset, length);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private void WriteNormal()
 		{
-			if (wrote != Wrote.Normal)
+			if (builder.Length > 0)
 			{
-				return;
+				builder.Append(' ');
+				document.WriteNormal(builder.ToString());
+				builder.Clear();
 			}
-
-			document.WriteNormal(builder.ToString());
-			wrote = Wrote.Normal;
-		}
-
-		private void WriteOrdered()
-		{
-			WriteDelete();
-			WriteInsert();
 		}
 
 		private void WriteDelete()
@@ -92,10 +100,6 @@ namespace ScriptureToolBoxComparison
 			if (!deletes.TryDequeue(out var value))
 			{
 				return;
-			}
-			if (wrote != Wrote.Delete)
-			{
-				document.WriteNormal(" ");
 			}
 			while (true)
 			{
@@ -117,7 +121,7 @@ namespace ScriptureToolBoxComparison
 			{
 				return;
 			}
-			if (wrote != Wrote.Insert)
+			if (wrote == Wrote.Delete)
 			{
 				document.WriteNormal(" ");
 			}
