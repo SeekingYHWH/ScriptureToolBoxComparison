@@ -84,6 +84,7 @@ namespace ScriptureToolBoxComparison
 		private void WriteOrdered()
 		{
 			WriteDelete();
+			WriteInsert();
 		}
 
 		private void WriteDelete()
@@ -94,7 +95,7 @@ namespace ScriptureToolBoxComparison
 			}
 			if (wrote != Wrote.Delete)
 			{
-				builder.Append(' ');
+				document.WriteNormal(" ");
 			}
 			while (true)
 			{
@@ -104,6 +105,30 @@ namespace ScriptureToolBoxComparison
 					document.WriteDelete(builder.ToString());
 					builder.Clear();
 					wrote = Wrote.Delete;
+					return;
+				}
+				builder.Append(' ');
+			}
+		}
+
+		private void WriteInsert()
+		{
+			if (!inserts.TryDequeue(out var value))
+			{
+				return;
+			}
+			if (wrote != Wrote.Insert)
+			{
+				document.WriteNormal(" ");
+			}
+			while (true)
+			{
+				builder.Append(value.Value, value.Offset, value.Length);
+				if (!deletes.TryDequeue(out value))
+				{
+					document.WriteInsert(builder.ToString());
+					builder.Clear();
+					wrote = Wrote.Insert;
 					return;
 				}
 				builder.Append(' ');
