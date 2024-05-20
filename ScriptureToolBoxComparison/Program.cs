@@ -28,7 +28,7 @@ namespace ScriptureToolBoxComparison
 		#region Fields
 		private static Uri server = new Uri("https://scripturetoolbox.com/html/ic/");
 		private static HttpClient client;
-		private static IDocument document = new NullDocument();
+		private static IDocument document;
 		private static IOrder order = new OriginalOrder();
 		private static readonly List<Book> books = new List<Book>();
 		#endregion //Fields
@@ -36,6 +36,7 @@ namespace ScriptureToolBoxComparison
 		#region Methods
 		private static List<string> ParseCommandLine(string[] args)
 		{
+			document = new XMLLog(new XmlDocument().DocumentElement, "log.xml");
 			ParseLoadBooks(@"Torah.config");
 
 			return null;
@@ -238,12 +239,13 @@ namespace ScriptureToolBoxComparison
 			while (true)
 			{
 				//Data
+				spanOpen += 13;
 				var spanClose = value.IndexOf("</span>", spanOpen);
 				if (spanClose < 0 || spanClose >= last)
 				{
 					return last;
 				}
-				var mode = value[spanOpen + 13];
+				var mode = value[spanOpen];
 				spanOpen = value.IndexOf('>', spanOpen);
 				if (spanOpen < 0 || spanOpen >= spanClose)
 				{
@@ -293,9 +295,9 @@ namespace ScriptureToolBoxComparison
 			}
 		}
 
-		private static bool ParseP(string value, int offset)
+		private static bool ParseP(string value, int open)
 		{
-			var pClose = value.IndexOf("</p>", offset);
+			var pClose = value.IndexOf("</p>", open);
 			bool done;
 			int last;
 			if (pClose > 0)
@@ -310,19 +312,56 @@ namespace ScriptureToolBoxComparison
 			}
 			while (true)
 			{
-				//Data
-				var spanOpen = value.IndexOf("<span class=\"", offset);
+				var spanOpen = value.IndexOf("<span class=\"", open);
 				//Process
-				if (spanOpen < 0 || spanOpen > last || offset < spanOpen)
+				if (spanOpen < 0 || spanOpen > last || open < spanOpen)
 				{
 					//Normal
-
+					var close = spanOpen >= 0 ? Math.Min(spanOpen, last) : last;
+					WriteNormal(value, open, close - open);
+					open = close;
 				}
-				else
+				if (open == spanOpen)
 				{
+					//Data
+					spanOpen += 13;
+					var spanClose = value.IndexOf("</span>", spanOpen);
+					if (spanClose < 0 || spanClose >= last)
+					{
+						return done;
+					}
+					var mode = value[spanOpen];
+					spanOpen = value.IndexOf('>', spanOpen);
+					if (spanOpen < 0 || spanOpen >= spanClose)
+					{
+						return done;
+					}
+					++spanOpen;
+					open = spanClose + 7;
+					if (value[spanClose - 1] == ')')
+					{
+						--spanClose;
+					}
+					//Process
+					if (spanOpen != spanClose)
+					{
+						switch (mode)
+						{
+						case 'd':
+							WriteDelete(value, spanOpen, spanClose - spanOpen);
+							break;
 
+						case 'i':
+							WriteInsert(value, spanOpen, spanClose - spanOpen);
+							break;
+
+						default:
+							break;
+						}
+					}
 				}
-				if (offset >= last)
+				//Next
+				if (open >= last)
 				{
 					return done;
 				}
