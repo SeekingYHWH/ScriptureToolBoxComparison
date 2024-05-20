@@ -71,9 +71,9 @@ namespace ScriptureToolBoxComparison
 				break;
 
 			case Wrote.Normal:
+				builder.Append(' ');
 				document.WriteNormal(builder.ToString());
 				builder.Clear();
-				document.WriteNormal(" ");
 				wrote = Wrote.Delete;
 				break;
 			}
@@ -101,9 +101,9 @@ namespace ScriptureToolBoxComparison
 				break;
 
 			case Wrote.Normal:
+				builder.Append(' ');
 				document.WriteNormal(builder.ToString());
 				builder.Clear();
-				document.WriteNormal(" ");
 				wrote = Wrote.Insert;
 				break;
 			}
