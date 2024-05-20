@@ -11,7 +11,7 @@ namespace ScriptureToolBoxComparison
 		private readonly string bookClose = "</h1>";
 		private readonly string chapterOpen = "<h3 style=\"text-align: center;\">Chapter ";
 		private readonly string chapterClose = "</h3>";
-		private readonly string versesOpen = "<p>";
+		private readonly string versesOpen = "<p style=\"text-align: justify;\">";
 		private readonly string versesClose = "</p>";
 		private readonly string deleteOpen = "<span style=\"text-decoration: line-through;\">";
 		private readonly string deleteClose = "</span>";
