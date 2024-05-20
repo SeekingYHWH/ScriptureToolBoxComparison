@@ -88,28 +88,30 @@ namespace ScriptureToolBoxComparison
 			{
 			default:
 				wrote = Wrote.Insert;
-				break;
+				builder.Append(value, offset, length);
+				return;
 
 			case Wrote.Delete:
 				document.WriteDelete(builder.ToString());
 				builder.Clear();
 				document.WriteNormal(" ");
 				wrote = Wrote.Insert;
-				break;
+				builder.Append(value, offset, length);
+				return;
 
 			case Wrote.Insert:
 				builder.Append(' ');
-				break;
+				builder.Append(value, offset, length);
+				return;
 
 			case Wrote.Normal:
 				builder.Append(' ');
 				document.WriteNormal(builder.ToString());
 				builder.Clear();
 				wrote = Wrote.Insert;
-				break;
+				builder.Append(value, offset, length);
+				return;
 			}
-			//Append
-			builder.Append(value, offset, length);
 		}
 
 		public void WriteNormal(string value, int offset, int length)
