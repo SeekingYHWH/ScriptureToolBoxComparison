@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ScriptureToolBoxComparison
 {
-	internal interface IDocument : IDisposable
+	public interface IDocument : IDisposable
 	{
 		void BookStart(Book book);
 		void BookFinish();

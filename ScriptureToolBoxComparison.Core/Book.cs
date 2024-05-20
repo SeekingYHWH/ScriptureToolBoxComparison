@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ScriptureToolBoxComparison
 {
-	internal sealed class Book
+	public sealed class Book
 	{
 		public string Name { get; set; }
 		public Chapter[] Chapters { get; set; }

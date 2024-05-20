@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ScriptureToolBoxComparison
 {
-	internal sealed class Chapter
+	public sealed class Chapter
 	{
 		private int name;
 		private string source;
