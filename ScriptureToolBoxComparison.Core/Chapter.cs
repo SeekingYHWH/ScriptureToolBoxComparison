@@ -6,16 +6,16 @@ namespace ScriptureToolBoxComparison
 {
 	public sealed class Chapter
 	{
-		private readonly int name;
+		private readonly string name;
 		private readonly string source;
 
-		public Chapter(int name, string source)
+		public Chapter(string name, string source)
 		{
 			this.name = name;
 			this.source = source;
 		}
 
-		public int Name => name;
+		public string Name => name;
 		public string Source => source;
 	}
 }
