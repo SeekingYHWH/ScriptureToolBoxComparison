@@ -60,20 +60,29 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			case Wrote.Delete:
-				builder.Append(' ');
+				if (Document.NeedSpace(value[offset]))
+				{
+					builder.Append(' ');
+				}
 				builder.Append(value, offset, length);
 				return;
 
 			case Wrote.Insert:
 				document.WriteInsert(builder.ToString());
 				builder.Clear();
-				document.WriteNormal(" ");
+				if (Document.NeedSpace(value[offset]))
+				{
+					document.WriteNormal(" ");
+				}
 				wrote = Wrote.Delete;
 				builder.Append(value, offset, length);
 				return;
 
 			case Wrote.Normal:
-				builder.Append(' ');
+				if (Document.NeedSpace(value[offset]))
+				{
+					builder.Append(' ');
+				}
 				document.WriteNormal(builder.ToString());
 				builder.Clear();
 				wrote = Wrote.Delete;
@@ -94,18 +103,27 @@ namespace ScriptureToolBoxComparison
 			case Wrote.Delete:
 				document.WriteDelete(builder.ToString());
 				builder.Clear();
-				document.WriteNormal(" ");
+				if (Document.NeedSpace(value[offset]))
+				{
+					document.WriteNormal(" ");
+				}
 				wrote = Wrote.Insert;
 				builder.Append(value, offset, length);
 				return;
 
 			case Wrote.Insert:
-				builder.Append(' ');
+				if (Document.NeedSpace(value[offset]))
+				{
+					builder.Append(' ');
+				}
 				builder.Append(value, offset, length);
 				return;
 
 			case Wrote.Normal:
-				builder.Append(' ');
+				if (Document.NeedSpace(value[offset]))
+				{
+					builder.Append(' ');
+				}
 				document.WriteNormal(builder.ToString());
 				builder.Clear();
 				wrote = Wrote.Insert;
@@ -127,7 +145,10 @@ namespace ScriptureToolBoxComparison
 				document.WriteDelete(builder.ToString());
 				builder.Clear();
 				wrote = Wrote.Normal;
-				builder.Append(' ');
+				if (Document.NeedSpace(value[offset]))
+				{
+					builder.Append(' ');
+				}
 				builder.Append(value, offset, length);
 				return;
 
@@ -135,12 +156,18 @@ namespace ScriptureToolBoxComparison
 				document.WriteInsert(builder.ToString());
 				builder.Clear();
 				wrote = Wrote.Normal;
-				builder.Append(' ');
+				if (Document.NeedSpace(value[offset]))
+				{
+					builder.Append(' ');
+				}
 				builder.Append(value, offset, length);
 				return;
 
 			case Wrote.Normal:
-				builder.Append(' ');
+				if (Document.NeedSpace(value[offset]))
+				{
+					builder.Append(' ');
+				}
 				builder.Append(value, offset, length);
 				return;
 			}
