@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ScriptureToolBoxComparison
 {
-	public class OriginalOrder : IOrder
+	public sealed class OriginalOrder : IOrder
 	{
 		private IDocument document;
 		private readonly StringBuilder builder = new StringBuilder();
