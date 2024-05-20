@@ -17,6 +17,7 @@ namespace ScriptureToolBoxComparison
 			var errors = ParseCommandLine(args);
 			if (errors != null)
 			{
+				PrintHelp(errors);
 				return -1;
 			}
 			Prepare();
@@ -62,6 +63,24 @@ namespace ScriptureToolBoxComparison
 				chapters.Clear();
 				var book = new Book(bookName, bookChapters);
 				books.Add(book);
+			}
+		}
+
+		private static void PrintHelp(List<string> errors)
+		{
+			Console.WriteLine();
+			Console.WriteLine("ScriptureToolBoxComparison.exe");
+			Console.WriteLine(" Required");
+			Console.WriteLine(" Optional");
+			Console.WriteLine();
+
+			if (errors != null && errors.Count > 0)
+			{
+				foreach (var error in errors)
+				{
+					Console.Error.WriteLine(error);
+				}
+				Console.WriteLine();
 			}
 		}
 
