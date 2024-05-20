@@ -15,6 +15,8 @@ namespace ScriptureToolBoxComparison
 			var writerStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read);
 			var writerText = new StreamWriter(writerStream);
 			this.writer = new XmlTextWriter(writerText);
+			this.writer.Formatting = Formatting.Indented;
+			this.writer.IndentChar = '\t';
 		}
 
 		~XMLLog()
