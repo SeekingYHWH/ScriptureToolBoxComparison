@@ -35,6 +35,27 @@ namespace ScriptureToolBoxComparison
 
 		public void ChapterFinish()
 		{
+			//State
+			switch (wrote)
+			{
+			default:
+				break;
+
+			case Wrote.Delete:
+				document.WriteDelete(builder.ToString());
+				builder.Clear();
+				break;
+
+			case Wrote.Insert:
+				document.WriteInsert(builder.ToString());
+				builder.Clear();
+				break;
+
+			case Wrote.Normal:
+				document.WriteNormal(builder.ToString());
+				builder.Clear();
+				break;
+			}
 		}
 
 		public void WriteDelete(string value, int offset, int length)
