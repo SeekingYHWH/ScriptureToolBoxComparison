@@ -120,11 +120,14 @@ namespace ScriptureToolBoxComparison
 				for (var b = 0; b < books.Count; ++b)
 				{
 					var book = books[b];
+					Console.WriteLine(book.Name);
 					document.BookStart(book);
 					var chapters = book.Chapters;
 					for (var c = 0; c < chapters.Length; ++c)
 					{
 						var chapter = chapters[c];
+						Console.Write('\t');
+						Console.WriteLine(chapter.Name);
 						document.ChapterStart(chapter);
 						order.ChapterStart(chapter);
 						using (var readerStream = client.GetStreamAsync(chapter.Source).Result)
