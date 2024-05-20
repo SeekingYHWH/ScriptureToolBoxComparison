@@ -6,7 +6,16 @@ namespace ScriptureToolBoxComparison
 {
 	public sealed class Book
 	{
-		public string Name { get; set; }
-		public Chapter[] Chapters { get; set; }
+		private readonly string name;
+		private readonly Chapter[] chapters;
+
+		public Book(string name, Chapter[] chapters)
+		{
+			this.name = name;
+			this.chapters = chapters;
+		}
+
+		public string Name => name;
+		public Chapter[] Chapters => chapters;
 	}
 }
