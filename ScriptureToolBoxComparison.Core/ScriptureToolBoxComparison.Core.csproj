@@ -7,4 +7,10 @@
     <RootNamespace>ScriptureToolBoxComparison</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="Torah.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
