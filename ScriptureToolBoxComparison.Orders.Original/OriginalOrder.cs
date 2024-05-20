@@ -52,33 +52,34 @@ namespace ScriptureToolBoxComparison
 
 		public void WriteDelete(string value, int offset, int length)
 		{
-			//State
 			switch (wrote)
 			{
 			default:
 				wrote = Wrote.Delete;
-				break;
+				builder.Append(value, offset, length);
+				return;
 
 			case Wrote.Delete:
 				builder.Append(' ');
-				break;
+				builder.Append(value, offset, length);
+				return;
 
 			case Wrote.Insert:
 				document.WriteInsert(builder.ToString());
 				builder.Clear();
 				document.WriteNormal(" ");
 				wrote = Wrote.Delete;
-				break;
+				builder.Append(value, offset, length);
+				return;
 
 			case Wrote.Normal:
 				builder.Append(' ');
 				document.WriteNormal(builder.ToString());
 				builder.Clear();
 				wrote = Wrote.Delete;
-				break;
+				builder.Append(value, offset, length);
+				return;
 			}
-			//Append
-			builder.Append(value, offset, length);
 		}
 
 		public void WriteInsert(string value, int offset, int length)
