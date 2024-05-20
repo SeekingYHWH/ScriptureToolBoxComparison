@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ScriptureToolBoxComparison
 {
-	internal enum Wrote
+	public enum Wrote
 	{
 		None = 0,
 		Delete = 1,
