@@ -24,19 +24,19 @@ namespace ScriptureToolBoxComparison
 		{
 		}
 
-		public void BookFinish()
-		{
-		}
-
 		public void BookStart(Book book)
 		{
 		}
 
-		public void ChapterFinish()
+		public void BookFinish()
 		{
 		}
 
 		public void ChapterStart(Chapter chapter)
+		{
+		}
+
+		public void ChapterFinish()
 		{
 		}
 
