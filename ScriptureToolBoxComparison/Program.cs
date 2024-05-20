@@ -154,29 +154,50 @@ namespace ScriptureToolBoxComparison
 			while (true)
 			{
 				//line
-				var line = reader.ReadLine();
-				if (line == null)
+				var value = reader.ReadLine();
+				if (value == null)
 				{
 					return;
 				}
 				//p
-				if (!line.Contains("<p onclick=") || line.Contains("Intro"))
+				if (!value.Contains("<p onclick=") || value.Contains("Intro"))
 				{
 					continue;
 				}
 				//line
-				line = reader.ReadLine();
-				if (line == null)
+				value = reader.ReadLine();
+				if (value == null)
 				{
 					return;
 				}
 				//<sub>...)<sub>
-				var offset = ParseSub(line);
+				var offset = ParseSub(value);
 				if (offset < 0)
 				{
 					continue;
 				}
-				ParseP(line, offset);
+				while (true)
+				{
+					if (ParseP(value, offset))
+					{
+						break;
+					}
+				Read:
+					value = reader.ReadLine();
+					if (value == null)
+					{
+						return;
+					}
+					if (string.IsNullOrWhiteSpace(value))
+					{
+						goto Read;
+					}
+					offset = 0;
+					while (char.IsWhiteSpace(value[offset]))
+					{
+						++offset;
+					}
+				}
 			}
 		}
 
@@ -272,8 +293,40 @@ namespace ScriptureToolBoxComparison
 			}
 		}
 
-		private static void ParseP(string value, int offset)
+		private static bool ParseP(string value, int offset)
 		{
+			var pClose = value.IndexOf("</p>", offset);
+			bool done;
+			int last;
+			if (pClose > 0)
+			{
+				done = true;
+				last = pClose;
+			}
+			else
+			{
+				done = false;
+				last = value.Length;
+			}
+			while (true)
+			{
+				//Data
+				var spanOpen = value.IndexOf("<span class=\"", offset);
+				//Process
+				if (spanOpen < 0 || spanOpen > last || offset < spanOpen)
+				{
+					//Normal
+
+				}
+				else
+				{
+
+				}
+				if (offset >= last)
+				{
+					return done;
+				}
+			}
 		}
 
 		private static void WriteDelete(string value, int offset, int length)
