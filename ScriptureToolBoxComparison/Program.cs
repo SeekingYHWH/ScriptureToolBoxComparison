@@ -36,8 +36,9 @@ namespace ScriptureToolBoxComparison
 		#region Methods
 		private static List<string> ParseCommandLine(string[] args)
 		{
-			document = new HTMLDocument(new XmlDocument().DocumentElement, @"Torah.html");
-			//document = new TextLog(new XmlDocument().DocumentElement, @"Torah.log");
+			document = new MultipleDocument(
+				new HTMLDocument(new XmlDocument().DocumentElement, @"Torah.html"),
+				new TextLog(new XmlDocument().DocumentElement, @"Torah.log"));
 			ParseLoadBooks(@"Torah.config");
 
 			return null;
