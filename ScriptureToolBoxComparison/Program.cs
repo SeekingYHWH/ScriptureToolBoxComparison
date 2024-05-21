@@ -321,15 +321,18 @@ namespace ScriptureToolBoxComparison
 		{
 			var pClose = value.IndexOf("</p>", open);
 			bool done;
+			bool barrier;
 			int last;
 			if (pClose > 0)
 			{
 				done = true;
+				barrier = true;
 				last = pClose;
 			}
 			else
 			{
 				done = false;
+				barrier = false;
 				last = value.Length;
 			}
 			while (true)
@@ -350,7 +353,7 @@ namespace ScriptureToolBoxComparison
 					var spanClose = value.IndexOf("</span>", spanOpen);
 					if (spanClose < 0 || spanClose >= last)
 					{
-						if (done)
+						if (barrier)
 						{
 							order.Barrier();
 						}
@@ -360,7 +363,7 @@ namespace ScriptureToolBoxComparison
 					spanOpen = value.IndexOf('>', spanOpen);
 					if (spanOpen < 0 || spanOpen >= spanClose)
 					{
-						if (done)
+						if (barrier)
 						{
 							order.Barrier();
 						}
@@ -371,6 +374,7 @@ namespace ScriptureToolBoxComparison
 					if (value[spanClose - 1] == ')')
 					{
 						--spanClose;
+						barrier = true;
 					}
 					//Process
 					if (spanOpen != spanClose)
@@ -393,7 +397,7 @@ namespace ScriptureToolBoxComparison
 				//Next
 				if (open >= last)
 				{
-					if (done)
+					if (barrier)
 					{
 						order.Barrier();
 					}
