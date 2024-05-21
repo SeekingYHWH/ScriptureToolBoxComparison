@@ -5,21 +5,23 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison", "ScriptureToolBoxComparison\ScriptureToolBoxComparison.csproj", "{6DEF8536-23FC-465C-8D22-432B371835D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Core", "ScriptureToolBoxComparison.Core\ScriptureToolBoxComparison.Core.csproj", "{5186774B-5BAD-4B23-885F-F9BA1CF26917}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison.Core", "ScriptureToolBoxComparison.Core\ScriptureToolBoxComparison.Core.csproj", "{5186774B-5BAD-4B23-885F-F9BA1CF26917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Documents.Null", "ScriptureToolBoxComparison.Documents.Null\ScriptureToolBoxComparison.Documents.Null.csproj", "{A756A2F6-2262-4633-9961-68E23B50CDFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison.Documents.Null", "ScriptureToolBoxComparison.Documents.Null\ScriptureToolBoxComparison.Documents.Null.csproj", "{A756A2F6-2262-4633-9961-68E23B50CDFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Orders.Original", "ScriptureToolBoxComparison.Orders.Original\ScriptureToolBoxComparison.Orders.Original.csproj", "{30A07A22-D304-4224-BE6D-930D3F0A1BBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison.Orders.Original", "ScriptureToolBoxComparison.Orders.Original\ScriptureToolBoxComparison.Orders.Original.csproj", "{30A07A22-D304-4224-BE6D-930D3F0A1BBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Orders.Sort", "ScriptureToolBoxComparison.Orders.Sort\ScriptureToolBoxComparison.Orders.Sort.csproj", "{B3F0B487-B7EA-4DFF-9500-687FF03BB01A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison.Orders.Sort", "ScriptureToolBoxComparison.Orders.Sort\ScriptureToolBoxComparison.Orders.Sort.csproj", "{B3F0B487-B7EA-4DFF-9500-687FF03BB01A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Documents.XMLLog", "ScriptureToolBoxComparison.Documents.XMLLog\ScriptureToolBoxComparison.Documents.XMLLog.csproj", "{B72FABF2-AC15-49FB-9399-CF6FD51C9E30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison.Documents.XMLLog", "ScriptureToolBoxComparison.Documents.XMLLog\ScriptureToolBoxComparison.Documents.XMLLog.csproj", "{B72FABF2-AC15-49FB-9399-CF6FD51C9E30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Documents.HTML", "ScriptureToolBoxComparison.Documents.HTML\ScriptureToolBoxComparison.Documents.HTML.csproj", "{586360AC-6DCE-4F04-8EF8-D085CDABDE5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison.Documents.HTML", "ScriptureToolBoxComparison.Documents.HTML\ScriptureToolBoxComparison.Documents.HTML.csproj", "{586360AC-6DCE-4F04-8EF8-D085CDABDE5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Documents.TextLog", "ScriptureToolBoxComparison.Documents.TextLog\ScriptureToolBoxComparison.Documents.TextLog.csproj", "{F040900F-5A5E-4E2B-901D-EF20DB09B085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison.Documents.TextLog", "ScriptureToolBoxComparison.Documents.TextLog\ScriptureToolBoxComparison.Documents.TextLog.csproj", "{F040900F-5A5E-4E2B-901D-EF20DB09B085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Documents.Multiple", "ScriptureToolBoxComparison.Documents.Multiple\ScriptureToolBoxComparison.Documents.Multiple.csproj", "{4599AF13-9103-4415-A85C-9BF15632042F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison.Documents.Multiple", "ScriptureToolBoxComparison.Documents.Multiple\ScriptureToolBoxComparison.Documents.Multiple.csproj", "{4599AF13-9103-4415-A85C-9BF15632042F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparisonDownload", "ScriptureToolBoxComparisonDownload\ScriptureToolBoxComparisonDownload.csproj", "{AB99D689-843D-41B6-9166-F80FBBCADF92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{4599AF13-9103-4415-A85C-9BF15632042F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4599AF13-9103-4415-A85C-9BF15632042F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4599AF13-9103-4415-A85C-9BF15632042F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB99D689-843D-41B6-9166-F80FBBCADF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB99D689-843D-41B6-9166-F80FBBCADF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB99D689-843D-41B6-9166-F80FBBCADF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB99D689-843D-41B6-9166-F80FBBCADF92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
