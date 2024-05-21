@@ -47,7 +47,7 @@ namespace ScriptureToolBoxComparison
 
 			case Wrote.Insert:
 				WriteDelete();
-				WriteInsertInsert();
+				WriteDeleteInsert();
 				if (Document.NeedSpace(value[offset]))
 				{
 					document.WriteNormal(" ");
@@ -215,7 +215,7 @@ namespace ScriptureToolBoxComparison
 			}
 		}
 
-		private void WriteInsertInsert()
+		private void WriteDeleteInsert()
 		{
 			var value = inserts.Dequeue();
 			--barrierCount;
