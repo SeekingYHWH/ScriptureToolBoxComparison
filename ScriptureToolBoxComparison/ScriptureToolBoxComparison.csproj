@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="OT.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="NT.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
