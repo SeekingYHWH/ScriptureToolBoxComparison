@@ -36,7 +36,7 @@ namespace ScriptureToolBoxComparison
 		#region Methods
 		private static List<string> ParseCommandLine(string[] args)
 		{
-			var name = "Prophets";
+			var name = "Writings";
 			document = new MultipleDocument(
 				new HTMLDocument(new XmlDocument().DocumentElement, name + ".html"),
 				new TextLog(new XmlDocument().DocumentElement, name + ".log"));

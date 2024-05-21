@@ -22,6 +22,9 @@
     <None Update="Prophets.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Writings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Torah.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
