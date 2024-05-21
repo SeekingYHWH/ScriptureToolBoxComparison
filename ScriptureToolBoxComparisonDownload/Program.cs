@@ -84,11 +84,12 @@ namespace ScriptureToolBoxComparison
 
 		private static int Run()
 		{
+			var separator = new char[] { Path.PathSeparator, Path.AltDirectorySeparatorChar };
+
 			for (var b = 0; b < books.Count; ++b)
 			{
 				var book = books[b];
 				Console.WriteLine(book.Name);
-				Directory.CreateDirectory(book.Name);
 				var chapters = book.Chapters;
 				for (var c = 0; c < chapters.Length; ++c)
 				{
@@ -100,7 +101,10 @@ namespace ScriptureToolBoxComparison
 					try
 					{
 						reader = client.GetStreamAsync(chapter.Source).Result;
-						var writerPath = Path.Combine(book.Name, chapter.Name + Path.GetExtension(chapter.Source));
+						var parts = chapter.Source.Split(separator);
+						var writerPath = Path.Combine(parts);
+						var directory = Path.GetDirectoryName(writerPath);
+						Directory.CreateDirectory(directory);
 						writer = new FileStream(writerPath, FileMode.Create, FileAccess.Write, FileShare.Read);
 						reader.CopyTo(writer);
 					}
