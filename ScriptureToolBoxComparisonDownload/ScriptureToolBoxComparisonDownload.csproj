@@ -13,25 +13,25 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\Bible.config" Link="Bible.config">
+		<None Include="..\ScriptureToolBoxComparison.Core\Bible.config" Link="Bible.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\NK.config" Link="NK.config">
+		<None Include="..\ScriptureToolBoxComparison.Core\NK.config" Link="NK.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\NT.config" Link="NT.config">
+		<None Include="..\ScriptureToolBoxComparison.Core\NT.config" Link="NT.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\OT.config" Link="OT.config">
+		<None Include="..\ScriptureToolBoxComparison.Core\OT.config" Link="OT.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\Prophets.config" Link="Prophets.config">
+		<None Include="..\ScriptureToolBoxComparison.Core\Prophets.config" Link="Prophets.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\Torah.config" Link="Torah.config">
+		<None Include="..\ScriptureToolBoxComparison.Core\Torah.config" Link="Torah.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\Writings.config" Link="Writings.config">
+		<None Include="..\ScriptureToolBoxComparison.Core\Writings.config" Link="Writings.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
