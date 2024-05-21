@@ -34,14 +34,7 @@ namespace ScriptureToolBoxComparison
 
 		public void ChapterFinish()
 		{
-			//Delete
-			WriteDelete();
-			//Insert
-			WriteInsert();
-			//Normal
-			document.WriteNormal(builder.ToString());
-			builder.Clear();
-			wrote = Wrote.Normal;
+			WriteNormalSort();
 		}
 
 		public void WriteDelete(string value, int offset, int length)
