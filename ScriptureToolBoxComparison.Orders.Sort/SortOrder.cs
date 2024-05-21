@@ -13,6 +13,7 @@ namespace ScriptureToolBoxComparison
 		private readonly Queue<Segment> deletes = new Queue<Segment>();
 		private readonly Queue<Segment> inserts = new Queue<Segment>();
 		private Wrote barrier;
+		private int barrierCount;
 
 		public SortOrder()
 		{
@@ -53,10 +54,18 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			case Wrote.Insert:
-				throw new NotImplementedException();
+				WriteDelete();
+				WriteInsertInsert();
+				if (Document.NeedSpace(value[offset]))
+				{
+					document.WriteNormal(" ");
+				}
+				barrier = Wrote.None;
+				deletes.Enqueue(new Segment(value, offset, length));
+				return;
 
 			default:
-				WriteNormal();
+				WriteNormal(value[offset]);
 				deletes.Enqueue(new Segment(value, offset, length));
 				return;
 			}
@@ -68,6 +77,7 @@ namespace ScriptureToolBoxComparison
 			{
 			case Wrote.Delete:
 				barrier = Wrote.Insert;
+				barrierCount = 0;
 				inserts.Enqueue(new Segment(value, offset, length));
 				return;
 
@@ -76,7 +86,7 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			default:
-				WriteNormal();
+				WriteNormal(value[offset]);
 				inserts.Enqueue(new Segment(value, offset, length));
 				return;
 			}
@@ -121,6 +131,7 @@ namespace ScriptureToolBoxComparison
 			if (inserts.Count > 0)
 			{
 				barrier = Wrote.Insert;
+				barrierCount = inserts.Count;
 				return;
 			}
 			if (deletes.Count > 0)
@@ -132,23 +143,13 @@ namespace ScriptureToolBoxComparison
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		private void WriteNormal()
+		private void WriteNormal(char value)
 		{
 			if (builder.Length > 0)
 			{
-				if (deletes.TryPeek(out var value))
+				if (Document.NeedSpace(value))
 				{
-					if (Document.NeedSpace(value.Value[value.Offset]))
-					{
-						builder.Append(' ');
-					}
-				}
-				else if (inserts.TryPeek(out value))
-				{
-					if (Document.NeedSpace(value.Value[value.Offset]))
-					{
-						builder.Append(' ');
-					}
+					builder.Append(' ');
 				}
 				document.WriteNormal(builder.ToString());
 				builder.Clear();
@@ -186,7 +187,10 @@ namespace ScriptureToolBoxComparison
 			}
 			if (wrote == Wrote.Delete)
 			{
-				document.WriteNormal(" ");
+				if (Document.NeedSpace(value.Value[value.Offset]))
+				{
+					document.WriteNormal(" ");
+				}
 			}
 			while (true)
 			{
@@ -198,6 +202,35 @@ namespace ScriptureToolBoxComparison
 					wrote = Wrote.Insert;
 					return;
 				}
+				if (Document.NeedSpace(value.Value[value.Offset]))
+				{
+					builder.Append(' ');
+				}
+			}
+		}
+
+		private void WriteInsertInsert()
+		{
+			var value = inserts.Dequeue();
+			--barrierCount;
+			if (wrote == Wrote.Delete)
+			{
+				if (Document.NeedSpace(value.Value[value.Offset]))
+				{
+					document.WriteNormal(" ");
+				}
+			}
+			while (true)
+			{
+				builder.Append(value.Value, value.Offset, value.Length);
+				if (barrierCount <= 0 || !inserts.TryDequeue(out value))
+				{
+					document.WriteInsert(builder.ToString());
+					builder.Clear();
+					wrote = Wrote.Insert;
+					return;
+				}
+				--barrierCount;
 				if (Document.NeedSpace(value.Value[value.Offset]))
 				{
 					builder.Append(' ');
