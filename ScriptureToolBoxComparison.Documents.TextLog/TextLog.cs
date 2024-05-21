@@ -33,14 +33,14 @@ namespace ScriptureToolBoxComparison
 
 		public void BookStart(Book book)
 		{
-			writer.Write("BOOK: ");
+			writer.Write("   BOOK: ");
 			writer.WriteLine(book.Name);
 			writer.Flush();
 		}
 
 		public void BookFinish()
 		{
-			writer.WriteLine("BOOK");
+			writer.WriteLine("   BOOK");
 			writer.Flush();
 		}
 
@@ -59,21 +59,21 @@ namespace ScriptureToolBoxComparison
 
 		public void WriteDelete(string text)
 		{
-			writer.Write("DETELE: ");
+			writer.Write(" DETELE: ");
 			writer.WriteLine(text);
 			writer.Flush();
 		}
 
 		public void WriteInsert(string text)
 		{
-			writer.Write("INSERT: ");
+			writer.Write(" INSERT: ");
 			writer.WriteLine(text);
 			writer.Flush();
 		}
 
 		public void WriteNormal(string text)
 		{
-			writer.Write("NORMAL: ");
+			writer.Write(" NORMAL: ");
 			writer.WriteLine(text);
 			writer.Flush();
 		}
