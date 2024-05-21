@@ -15,4 +15,10 @@
     <ProjectReference Include="..\ScriptureToolBoxComparison.Orders.Sort\ScriptureToolBoxComparison.Orders.Sort.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Torah.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
