@@ -46,7 +46,6 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			case Wrote.Insert:
-				WriteDelete();
 				WriteDeleteInsert();
 				if (Document.NeedSpace(value[offset]))
 				{
@@ -187,7 +186,34 @@ namespace ScriptureToolBoxComparison
 
 		private void WriteDeleteInsert()
 		{
-			var value = inserts.Dequeue();
+			Segment value;
+
+			//Normal
+			if (builder.Length > 0)
+			{
+				if (deletes.TryPeek(out value))
+				{
+					if (Document.NeedSpace(value.Value[value.Offset]))
+					{
+						builder.Append(' ');
+					}
+				}
+				else if (inserts.TryPeek(out value))
+				{
+					if (Document.NeedSpace(value.Value[value.Offset]))
+					{
+						builder.Append(' ');
+					}
+				}
+				document.WriteNormal(builder.ToString());
+				builder.Clear();
+			}
+
+			//Delete
+			WriteDelete();
+
+			//Insert
+			value = inserts.Dequeue();
 			--barrierCount;
 			if (wrote == Wrote.Delete)
 			{
