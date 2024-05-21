@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ScriptureToolBoxComparison
@@ -65,7 +64,6 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			default:
-				WriteNormal(value[offset]);
 				deletes.Enqueue(new Segment(value, offset, length));
 				return;
 			}
@@ -86,7 +84,6 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			default:
-				WriteNormal(value[offset]);
 				inserts.Enqueue(new Segment(value, offset, length));
 				return;
 			}
@@ -95,8 +92,7 @@ namespace ScriptureToolBoxComparison
 		public void WriteNormal(string value, int offset, int length)
 		{
 			//Sort
-			WriteDelete();
-			WriteInsert();
+			WriteNormalSort();
 			//State
 			barrier = Wrote.None;
             switch (wrote)
@@ -142,18 +138,35 @@ namespace ScriptureToolBoxComparison
 			barrier = Wrote.None;
 		}
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		private void WriteNormal(char value)
+		private void WriteNormalSort()
 		{
-			if (builder.Length > 0)
+			if (builder.Length <= 0)
 			{
-				if (Document.NeedSpace(value))
+				return;
+			}
+			if (deletes.TryPeek(out var value))
+			{
+				if (Document.NeedSpace(value.Value[value.Offset]))
 				{
 					builder.Append(' ');
 				}
-				document.WriteNormal(builder.ToString());
-				builder.Clear();
 			}
+			else if (inserts.TryPeek(out value))
+			{
+				if (Document.NeedSpace(value.Value[value.Offset]))
+				{
+					builder.Append(' ');
+				}
+			}
+			else
+			{
+				return;
+			}
+			document.WriteNormal(builder.ToString());
+			builder.Clear();
+
+			WriteDelete();
+			WriteInsert();
 		}
 
 		private void WriteDelete()
