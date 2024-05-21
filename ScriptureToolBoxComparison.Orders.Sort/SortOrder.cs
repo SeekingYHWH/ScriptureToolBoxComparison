@@ -99,12 +99,18 @@ namespace ScriptureToolBoxComparison
 			case Wrote.Delete:
 			case Wrote.Insert:
 				wrote = Wrote.Normal;
-				builder.Append(' ');
+				if (Document.NeedSpace(value[offset]))
+				{
+					builder.Append(' ');
+				}
 				builder.Append(value, offset, length);
 				return;
 
 			case Wrote.Normal:
-				builder.Append(' ');
+				if (Document.NeedSpace(value[offset]))
+				{
+					builder.Append(' ');
+				}
 				builder.Append(value, offset, length);
 				return;
 			}
