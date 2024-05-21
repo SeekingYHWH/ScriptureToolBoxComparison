@@ -7,7 +7,7 @@ namespace ScriptureToolBoxComparison
 {
 	public static class BooksFactory
 	{
-		private static void LoadBooks(List<Book> books, string configPath)
+		public static void LoadBooks(List<Book> books, string configPath)
 		{
 			var doc = new XmlDocument();
 			doc.Load(configPath);
