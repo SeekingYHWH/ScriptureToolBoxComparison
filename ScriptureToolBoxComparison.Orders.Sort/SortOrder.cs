@@ -158,7 +158,10 @@ namespace ScriptureToolBoxComparison
 					wrote = Wrote.Delete;
 					return;
 				}
-				builder.Append(' ');
+				if (Document.NeedSpace(value.Value[value.Offset]))
+				{
+					builder.Append(' ');
+				}
 			}
 		}
 
@@ -182,7 +185,10 @@ namespace ScriptureToolBoxComparison
 					wrote = Wrote.Insert;
 					return;
 				}
-				builder.Append(' ');
+				if (Document.NeedSpace(value.Value[value.Offset]))
+				{
+					builder.Append(' ');
+				}
 			}
 		}
 	}
