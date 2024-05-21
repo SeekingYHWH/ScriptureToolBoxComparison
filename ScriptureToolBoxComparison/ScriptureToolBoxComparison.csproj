@@ -36,6 +36,7 @@
     <ProjectReference Include="..\ScriptureToolBoxComparison.Documents.HTML\ScriptureToolBoxComparison.Documents.HTML.csproj" />
     <ProjectReference Include="..\ScriptureToolBoxComparison.Documents.Multiple\ScriptureToolBoxComparison.Documents.Multiple.csproj" />
     <ProjectReference Include="..\ScriptureToolBoxComparison.Documents.TextLog\ScriptureToolBoxComparison.Documents.TextLog.csproj" />
+    <ProjectReference Include="..\ScriptureToolBoxComparison.Documents.XMLLog\ScriptureToolBoxComparison.Documents.XMLLog.csproj" />
     <ProjectReference Include="..\ScriptureToolBoxComparison.Orders.Sort\ScriptureToolBoxComparison.Orders.Sort.csproj" />
   </ItemGroup>
 
