@@ -132,30 +132,25 @@ namespace ScriptureToolBoxComparison
 
 		private void WriteNormalSort()
 		{
-			if (builder.Length <= 0)
+			if (builder.Length > 0)
 			{
-				return;
-			}
-			if (deletes.TryPeek(out var value))
-			{
-				if (Document.NeedSpace(value.Value[value.Offset]))
+				if (deletes.TryPeek(out var value))
 				{
-					builder.Append(' ');
+					if (Document.NeedSpace(value.Value[value.Offset]))
+					{
+						builder.Append(' ');
+					}
 				}
-			}
-			else if (inserts.TryPeek(out value))
-			{
-				if (Document.NeedSpace(value.Value[value.Offset]))
+				else if (inserts.TryPeek(out value))
 				{
-					builder.Append(' ');
+					if (Document.NeedSpace(value.Value[value.Offset]))
+					{
+						builder.Append(' ');
+					}
 				}
+				document.WriteNormal(builder.ToString());
+				builder.Clear();
 			}
-			else
-			{
-				return;
-			}
-			document.WriteNormal(builder.ToString());
-			builder.Clear();
 
 			WriteDelete();
 			WriteInsert();
