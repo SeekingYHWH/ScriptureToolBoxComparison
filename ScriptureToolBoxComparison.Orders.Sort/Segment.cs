@@ -20,5 +20,10 @@ namespace ScriptureToolBoxComparison
 		public string Value => value;
 		public int Offset => offset;
 		public int Length => length;
+
+		public override string ToString()
+		{
+			return value.Substring(offset, length);
+		}
 	}
 }
