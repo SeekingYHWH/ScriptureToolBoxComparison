@@ -36,8 +36,4 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\ScriptureToolBoxComparison.Core\ScriptureToolBoxComparison.Core.csproj" />
-	</ItemGroup>
-
 </Project>
