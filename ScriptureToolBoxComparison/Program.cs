@@ -40,7 +40,7 @@ namespace ScriptureToolBoxComparison
 			document = new MultipleDocument(
 				new HTMLDocument(new XmlDocument().DocumentElement, name + ".html"),
 				new TextLog(new XmlDocument().DocumentElement, name + ".log"),
-				new XMLLog(new XmlDocument().DocumentElement, name + ".log"));
+				new XMLLog(new XmlDocument().DocumentElement, name + ".xml"));
 			BooksFactory.LoadBooks(books, name + ".config");
 
 			return null;
