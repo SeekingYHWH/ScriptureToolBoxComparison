@@ -40,32 +40,9 @@ namespace ScriptureToolBoxComparison
 			document = new MultipleDocument(
 				new HTMLDocument(new XmlDocument().DocumentElement, name + ".html"),
 				new TextLog(new XmlDocument().DocumentElement, name + ".log"));
-			ParseLoadBooks(name + ".config");
+			BooksFactory.LoadBooks(books, name + ".config");
 
 			return null;
-		}
-
-		private static void ParseLoadBooks(string configPath)
-		{
-			var doc = new XmlDocument();
-			doc.Load(configPath);
-			var config = doc.DocumentElement;
-			var chapters = new List<Chapter>();
-			foreach (XmlNode bookConfig in config.SelectNodes("Book"))
-			{
-				var bookName = bookConfig.Attributes["Name"].InnerText;
-				foreach (XmlNode chapterConfig in bookConfig.SelectNodes("Chapter"))
-				{
-					var chapterName = chapterConfig.Attributes["Name"].InnerText;
-					var chapterSource = chapterConfig.Attributes["Source"].InnerText;
-					var chapter = new Chapter(chapterName, chapterSource);
-					chapters.Add(chapter);
-				}
-				var bookChapters = chapters.ToArray();
-				chapters.Clear();
-				var book = new Book(bookName, bookChapters);
-				books.Add(book);
-			}
 		}
 
 		private static void PrintHelp(List<string> errors)
