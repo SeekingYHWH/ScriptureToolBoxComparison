@@ -19,6 +19,9 @@
     <None Update="NT.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="NK.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Prophets.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
