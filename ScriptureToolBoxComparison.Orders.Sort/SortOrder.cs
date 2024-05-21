@@ -29,6 +29,7 @@ namespace ScriptureToolBoxComparison
 			wrote = Wrote.None;
 			deletes.Clear();
 			inserts.Clear();
+			barrier = Wrote.None;
 		}
 
 		public void ChapterFinish()
@@ -45,18 +46,40 @@ namespace ScriptureToolBoxComparison
 
 		public void WriteDelete(string value, int offset, int length)
 		{
-			//Normal
-			WriteNormal();
-			//Delete
-			deletes.Enqueue(new Segment(value, offset, length));
+			switch (barrier)
+			{
+			case Wrote.Delete:
+				deletes.Enqueue(new Segment(value, offset, length));
+				return;
+
+			case Wrote.Insert:
+				throw new NotImplementedException();
+
+			default:
+				WriteNormal();
+				deletes.Enqueue(new Segment(value, offset, length));
+				return;
+			}
 		}
 
 		public void WriteInsert(string value, int offset, int length)
 		{
-			//Normal
-			WriteNormal();
-			//Insert
-			inserts.Enqueue(new Segment(value, offset, length));
+			switch (barrier)
+			{
+			case Wrote.Delete:
+				barrier = Wrote.Insert;
+				inserts.Enqueue(new Segment(value, offset, length));
+				return;
+
+			case Wrote.Insert:
+				inserts.Enqueue(new Segment(value, offset, length));
+				return;
+
+			default:
+				WriteNormal();
+				inserts.Enqueue(new Segment(value, offset, length));
+				return;
+			}
 		}
 
 		public void WriteNormal(string value, int offset, int length)
@@ -64,29 +87,42 @@ namespace ScriptureToolBoxComparison
 			//Sort
 			WriteDelete();
 			WriteInsert();
-            //State
+			//State
+			barrier = Wrote.None;
             switch (wrote)
 			{
 			default:
 				wrote = Wrote.Normal;
-				break;
+				builder.Append(value, offset, length);
+				return;
 
 			case Wrote.Delete:
 			case Wrote.Insert:
-				builder.Append(' ');
 				wrote = Wrote.Normal;
-				break;
+				builder.Append(' ');
+				builder.Append(value, offset, length);
+				return;
 
 			case Wrote.Normal:
 				builder.Append(' ');
-				break;
+				builder.Append(value, offset, length);
+				return;
 			}
-			//Append
-			builder.Append(value, offset, length);
 		}
 
 		public void Barrier()
 		{
+			if (inserts.Count > 0)
+			{
+				barrier = Wrote.Insert;
+				return;
+			}
+			if (deletes.Count > 0)
+			{
+				barrier = Wrote.Delete;
+				return;
+			}
+			barrier = Wrote.None;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -133,7 +169,7 @@ namespace ScriptureToolBoxComparison
 			while (true)
 			{
 				builder.Append(value.Value, value.Offset, value.Length);
-				if (!deletes.TryDequeue(out value))
+				if (!inserts.TryDequeue(out value))
 				{
 					document.WriteInsert(builder.ToString());
 					builder.Clear();
