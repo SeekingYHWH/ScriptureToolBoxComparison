@@ -29,7 +29,7 @@ namespace ScriptureToolBoxComparison
 		private static Uri server = new Uri("https://scripturetoolbox.com/html/ic/");
 		private static HttpClient client;
 		private static IDocument document;
-		private static IOrder order = new OriginalOrder();
+		private static IOrder order = new SortOrder();
 		private static readonly List<Book> books = new List<Book>();
 		#endregion //Fields
 
@@ -231,13 +231,16 @@ namespace ScriptureToolBoxComparison
 				if (subOpen < subClose)
 				{
 					WriteNormal(value, subOpen, subClose - subOpen);
+					order.Barrier();
 				}
 				return last;
 			}
+			var barrier = false;
 			//Normal
 			if (spanOpen > subOpen)
 			{
 				WriteNormal(value, subOpen, spanOpen - subOpen);
+				barrier = true;
 			}
 			while (true)
 			{
@@ -246,12 +249,20 @@ namespace ScriptureToolBoxComparison
 				var spanClose = value.IndexOf("</span>", spanOpen);
 				if (spanClose < 0 || spanClose >= last)
 				{
+					if (barrier)
+					{
+						order.Barrier();
+					}
 					return last;
 				}
 				var mode = value[spanOpen];
 				spanOpen = value.IndexOf('>', spanOpen);
 				if (spanOpen < 0 || spanOpen >= spanClose)
 				{
+					if (barrier)
+					{
+						order.Barrier();
+					}
 					return last;
 				}
 				++spanOpen;
@@ -267,10 +278,12 @@ namespace ScriptureToolBoxComparison
 					{
 					case 'd':
 						WriteDelete(value, spanOpen, spanClose - spanOpen);
+						barrier = true;
 						break;
 
 					case 'i':
 						WriteInsert(value, spanOpen, spanClose - spanOpen);
+						barrier = true;
 						break;
 
 					default:
@@ -291,7 +304,12 @@ namespace ScriptureToolBoxComparison
 						if (subOpen < subClose)
 						{
 							WriteNormal(value, subOpen, subClose - subOpen);
+							barrier = true;
 						}
+					}
+					if (barrier)
+					{
+						order.Barrier();
 					}
 					return last;
 				}
@@ -331,12 +349,20 @@ namespace ScriptureToolBoxComparison
 					var spanClose = value.IndexOf("</span>", spanOpen);
 					if (spanClose < 0 || spanClose >= last)
 					{
+						if (done)
+						{
+							order.Barrier();
+						}
 						return done;
 					}
 					var mode = value[spanOpen];
 					spanOpen = value.IndexOf('>', spanOpen);
 					if (spanOpen < 0 || spanOpen >= spanClose)
 					{
+						if (done)
+						{
+							order.Barrier();
+						}
 						return done;
 					}
 					++spanOpen;
@@ -366,6 +392,10 @@ namespace ScriptureToolBoxComparison
 				//Next
 				if (open >= last)
 				{
+					if (done)
+					{
+						order.Barrier();
+					}
 					return done;
 				}
 			}

@@ -12,5 +12,6 @@ namespace ScriptureToolBoxComparison
 		void WriteDelete(string value, int offset, int length);
 		void WriteInsert(string value, int offset, int length);
 		void WriteNormal(string value, int offset, int length);
+		void Barrier();
 	}
 }

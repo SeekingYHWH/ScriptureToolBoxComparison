@@ -12,6 +12,7 @@ namespace ScriptureToolBoxComparison
 		private Wrote wrote;
 		private readonly Queue<Segment> deletes = new Queue<Segment>();
 		private readonly Queue<Segment> inserts = new Queue<Segment>();
+		private Wrote barrier;
 
 		public SortOrder()
 		{
@@ -82,6 +83,10 @@ namespace ScriptureToolBoxComparison
 			}
 			//Append
 			builder.Append(value, offset, length);
+		}
+
+		public void Barrier()
+		{
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

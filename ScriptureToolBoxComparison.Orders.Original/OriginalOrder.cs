@@ -172,5 +172,9 @@ namespace ScriptureToolBoxComparison
 				return;
 			}
 		}
+
+		public void Barrier()
+		{
+		}
 	}
 }
