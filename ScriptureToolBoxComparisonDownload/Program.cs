@@ -88,6 +88,7 @@ namespace ScriptureToolBoxComparison
 			{
 				var book = books[b];
 				Console.WriteLine(book.Name);
+				Directory.CreateDirectory(book.Name);
 				var chapters = book.Chapters;
 				for (var c = 0; c < chapters.Length; ++c)
 				{
