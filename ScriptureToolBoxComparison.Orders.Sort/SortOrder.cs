@@ -136,7 +136,20 @@ namespace ScriptureToolBoxComparison
 		{
 			if (builder.Length > 0)
 			{
-				builder.Append(' ');
+				if (deletes.TryPeek(out var value))
+				{
+					if (Document.NeedSpace(value.Value[value.Offset]))
+					{
+						builder.Append(' ');
+					}
+				}
+				else if (inserts.TryPeek(out value))
+				{
+					if (Document.NeedSpace(value.Value[value.Offset]))
+					{
+						builder.Append(' ');
+					}
+				}
 				document.WriteNormal(builder.ToString());
 				builder.Clear();
 			}
