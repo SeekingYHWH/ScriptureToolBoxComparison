@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Bible.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="OT.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
