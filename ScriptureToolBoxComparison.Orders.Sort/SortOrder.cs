@@ -185,6 +185,35 @@ namespace ScriptureToolBoxComparison
 			}
 		}
 
+		private void WriteDeleteInsert()
+		{
+			var value = inserts.Dequeue();
+			--barrierCount;
+			if (wrote == Wrote.Delete)
+			{
+				if (Document.NeedSpace(value.Value[value.Offset]))
+				{
+					document.WriteNormal(" ");
+				}
+			}
+			while (true)
+			{
+				builder.Append(value.Value, value.Offset, value.Length);
+				if (barrierCount <= 0 || !inserts.TryDequeue(out value))
+				{
+					document.WriteInsert(builder.ToString());
+					builder.Clear();
+					wrote = Wrote.Insert;
+					return;
+				}
+				--barrierCount;
+				if (Document.NeedSpace(value.Value[value.Offset]))
+				{
+					builder.Append(' ');
+				}
+			}
+		}
+
 		private void WriteInsert()
 		{
 			if (!inserts.TryDequeue(out var value))
@@ -208,35 +237,6 @@ namespace ScriptureToolBoxComparison
 					wrote = Wrote.Insert;
 					return;
 				}
-				if (Document.NeedSpace(value.Value[value.Offset]))
-				{
-					builder.Append(' ');
-				}
-			}
-		}
-
-		private void WriteDeleteInsert()
-		{
-			var value = inserts.Dequeue();
-			--barrierCount;
-			if (wrote == Wrote.Delete)
-			{
-				if (Document.NeedSpace(value.Value[value.Offset]))
-				{
-					document.WriteNormal(" ");
-				}
-			}
-			while (true)
-			{
-				builder.Append(value.Value, value.Offset, value.Length);
-				if (barrierCount <= 0 || !inserts.TryDequeue(out value))
-				{
-					document.WriteInsert(builder.ToString());
-					builder.Clear();
-					wrote = Wrote.Insert;
-					return;
-				}
-				--barrierCount;
 				if (Document.NeedSpace(value.Value[value.Offset]))
 				{
 					builder.Append(' ');
