@@ -74,6 +74,7 @@ namespace ScriptureToolBoxComparison
 			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
 			paragraph.AppendText(value.Name);
 			chapter = section.AddParagraph();
+			chapter.Format.HorizontalAlignment = HorizontalAlignment.Justify;
 		}
 
 		public void ChapterFinish()
