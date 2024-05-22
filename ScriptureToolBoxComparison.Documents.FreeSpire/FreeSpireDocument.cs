@@ -10,6 +10,7 @@ namespace ScriptureToolBoxComparison
 {
 	/// <summary>
 	/// Limit of 500 paragraphs
+	/// Cannot handle different text types
 	/// </summary>
 	public sealed class FreeSpireDocument : IDocument
 	{
