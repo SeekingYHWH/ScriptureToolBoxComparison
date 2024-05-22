@@ -15,7 +15,7 @@ namespace ScriptureToolBoxComparison
 	public sealed class FreeSpireDocument : IDocument
 	{
 		private readonly string path;
-		private Document? document;
+		private Document document;
 		private CharacterFormat delete;
 		private CharacterFormat insert;
 		private CharacterFormat normal;
@@ -49,8 +49,11 @@ namespace ScriptureToolBoxComparison
 				return;
             }
 
-			section = document.AddSection();
-			section.BreakCode = SectionBreakType.NoBreak;
+			if (section != null)
+			{
+				section = document.AddSection();
+				section.BreakCode = SectionBreakType.NoBreak;
+			}
 			document.SaveToFile(path, FileFormat.Docx2019);
 
 			document = null;
@@ -58,10 +61,11 @@ namespace ScriptureToolBoxComparison
 
 		public void BookStart(Book value)
 		{
-			if (document.Sections.Count <= 0)
+			if (section == null)
 			{
 				section = document.AddSection();
 				section.BreakCode = SectionBreakType.NewPage;
+				CreateHeaderFooter();
 			}
 			else
 			{
@@ -112,6 +116,19 @@ namespace ScriptureToolBoxComparison
 		{
 			var range = chapter.AppendText(value);
 			range.ApplyCharacterFormat(normal);
+		}
+
+		private void CreateHeaderFooter()
+		{
+			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
+
+			var of = section.HeadersFooters.OddFooter.AddParagraph();
+			of.Format.HorizontalAlignment = HorizontalAlignment.Right;
+			of.AppendField("page number", FieldType.FieldPage);
+
+			var ef = section.HeadersFooters.EvenFooter.AddParagraph();
+			ef.Format.HorizontalAlignment = HorizontalAlignment.Left;
+			ef.AppendField("page number", FieldType.FieldPage);
 		}
 	}
 }
