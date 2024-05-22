@@ -36,7 +36,7 @@ namespace ScriptureToolBoxComparison
 		#region Methods
 		private static List<string> ParseCommandLine(string[] args)
 		{
-			var name = "Bible";
+			var name = "Torah";
 			document = new MultipleDocument(
 				new GemBoxDocument(new XmlDocument().DocumentElement, name + ".docx"),
 				new HTMLDocument(new XmlDocument().DocumentElement, name + ".html"),
