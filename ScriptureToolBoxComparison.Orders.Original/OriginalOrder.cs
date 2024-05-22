@@ -60,7 +60,7 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			case Wrote.Delete:
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					builder.Append(' ');
 				}
@@ -70,7 +70,7 @@ namespace ScriptureToolBoxComparison
 			case Wrote.Insert:
 				document.WriteInsert(builder.ToString());
 				builder.Clear();
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					document.WriteNormal(" ");
 				}
@@ -79,7 +79,7 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			case Wrote.Normal:
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					builder.Append(' ');
 				}
@@ -103,7 +103,7 @@ namespace ScriptureToolBoxComparison
 			case Wrote.Delete:
 				document.WriteDelete(builder.ToString());
 				builder.Clear();
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					document.WriteNormal(" ");
 				}
@@ -112,7 +112,7 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			case Wrote.Insert:
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					builder.Append(' ');
 				}
@@ -120,7 +120,7 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			case Wrote.Normal:
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					builder.Append(' ');
 				}
@@ -145,7 +145,7 @@ namespace ScriptureToolBoxComparison
 				document.WriteDelete(builder.ToString());
 				builder.Clear();
 				wrote = Wrote.Normal;
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					builder.Append(' ');
 				}
@@ -156,7 +156,7 @@ namespace ScriptureToolBoxComparison
 				document.WriteInsert(builder.ToString());
 				builder.Clear();
 				wrote = Wrote.Normal;
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					builder.Append(' ');
 				}
@@ -164,7 +164,7 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			case Wrote.Normal:
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					builder.Append(' ');
 				}

@@ -47,7 +47,7 @@ namespace ScriptureToolBoxComparison
 
 			case Wrote.Insert:
 				WriteDeleteInsert();
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					document.WriteNormal(" ");
 				}
@@ -97,7 +97,7 @@ namespace ScriptureToolBoxComparison
 			case Wrote.Delete:
 			case Wrote.Insert:
 				wrote = Wrote.Normal;
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					builder.Append(' ');
 				}
@@ -105,7 +105,7 @@ namespace ScriptureToolBoxComparison
 				return;
 
 			case Wrote.Normal:
-				if (Document.NeedSpace(value[offset]))
+				if (Order.NeedSpace(value[offset]))
 				{
 					builder.Append(' ');
 				}
@@ -136,14 +136,14 @@ namespace ScriptureToolBoxComparison
 			{
 				if (deletes.TryPeek(out var value))
 				{
-					if (Document.NeedSpace(value.Value[value.Offset]))
+					if (Order.NeedSpace(value.Value[value.Offset]))
 					{
 						builder.Append(' ');
 					}
 				}
 				else if (inserts.TryPeek(out value))
 				{
-					if (Document.NeedSpace(value.Value[value.Offset]))
+					if (Order.NeedSpace(value.Value[value.Offset]))
 					{
 						builder.Append(' ');
 					}
@@ -172,7 +172,7 @@ namespace ScriptureToolBoxComparison
 					wrote = Wrote.Delete;
 					return;
 				}
-				if (Document.NeedSpace(value.Value[value.Offset]))
+				if (Order.NeedSpace(value.Value[value.Offset]))
 				{
 					builder.Append(' ');
 				}
@@ -188,14 +188,14 @@ namespace ScriptureToolBoxComparison
 			{
 				if (deletes.TryPeek(out value))
 				{
-					if (Document.NeedSpace(value.Value[value.Offset]))
+					if (Order.NeedSpace(value.Value[value.Offset]))
 					{
 						builder.Append(' ');
 					}
 				}
 				else if (inserts.TryPeek(out value))
 				{
-					if (Document.NeedSpace(value.Value[value.Offset]))
+					if (Order.NeedSpace(value.Value[value.Offset]))
 					{
 						builder.Append(' ');
 					}
@@ -212,7 +212,7 @@ namespace ScriptureToolBoxComparison
 			--barrierCount;
 			if (wrote == Wrote.Delete)
 			{
-				if (Document.NeedSpace(value.Value[value.Offset]))
+				if (Order.NeedSpace(value.Value[value.Offset]))
 				{
 					document.WriteNormal(" ");
 				}
@@ -228,7 +228,7 @@ namespace ScriptureToolBoxComparison
 					return;
 				}
 				--barrierCount;
-				if (Document.NeedSpace(value.Value[value.Offset]))
+				if (Order.NeedSpace(value.Value[value.Offset]))
 				{
 					builder.Append(' ');
 				}
@@ -243,7 +243,7 @@ namespace ScriptureToolBoxComparison
 			}
 			if (wrote == Wrote.Delete)
 			{
-				if (Document.NeedSpace(value.Value[value.Offset]))
+				if (Order.NeedSpace(value.Value[value.Offset]))
 				{
 					document.WriteNormal(" ");
 				}
@@ -258,7 +258,7 @@ namespace ScriptureToolBoxComparison
 					wrote = Wrote.Insert;
 					return;
 				}
-				if (Document.NeedSpace(value.Value[value.Offset]))
+				if (Order.NeedSpace(value.Value[value.Offset]))
 				{
 					builder.Append(' ');
 				}

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ScriptureToolBoxComparison
 {
-	public static class Document
+	public static class Order
 	{
 		public static bool NeedSpace(char letter)
 		{
