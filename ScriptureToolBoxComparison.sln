@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparisonD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Documents.GemBox", "ScriptureToolBoxComparison.Documents.GemBox\ScriptureToolBoxComparison.Documents.GemBox.csproj", "{560A7B6F-BB47-4AF8-8835-FECCA5306E5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Documents.FreeSpire", "ScriptureToolBoxComparison.Documents.FreeSpire\ScriptureToolBoxComparison.Documents.FreeSpire.csproj", "{D5ECD719-B9B6-4B7D-8585-D2B5426E6B58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{560A7B6F-BB47-4AF8-8835-FECCA5306E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{560A7B6F-BB47-4AF8-8835-FECCA5306E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{560A7B6F-BB47-4AF8-8835-FECCA5306E5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5ECD719-B9B6-4B7D-8585-D2B5426E6B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5ECD719-B9B6-4B7D-8585-D2B5426E6B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5ECD719-B9B6-4B7D-8585-D2B5426E6B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5ECD719-B9B6-4B7D-8585-D2B5426E6B58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
