@@ -19,7 +19,7 @@ namespace ScriptureToolBoxComparison
 		private CharacterFormat delete;
 		private CharacterFormat insert;
 		private CharacterFormat normal;
-		private Section? section;
+		private Section section;
 		private Paragraph chapter;
 
 		public FreeSpireDocument(XmlNode config, string path)
@@ -30,7 +30,6 @@ namespace ScriptureToolBoxComparison
 			this.delete = new CharacterFormat(document) { Bold = false, IsStrikeout = true, DoubleStrike = true, };
 			this.insert = new CharacterFormat(document) { Bold = true, IsStrikeout = false, DoubleStrike = false, };
 			this.normal = new CharacterFormat(document) { Bold = false, IsStrikeout = false, DoubleStrike = false, };
-			this.section = document.AddSection();
 		}
 
 		~FreeSpireDocument()
@@ -50,17 +49,33 @@ namespace ScriptureToolBoxComparison
 				return;
             }
 
-            document.SaveToFile(path, FileFormat.Docx2019);
+			section = document.AddSection();
+			section.BreakCode = SectionBreakType.NoBreak;
+			document.SaveToFile(path, FileFormat.Docx2019);
 
 			document = null;
 		}
 
 		public void BookStart(Book value)
 		{
-			var paragraph = section!.AddParagraph();
+			if (document.Sections.Count <= 0)
+			{
+				section = document.AddSection();
+				section.BreakCode = SectionBreakType.NewPage;
+			}
+			else
+			{
+				section = document.AddSection();
+				section.BreakCode = SectionBreakType.NoBreak;
+			}
+			var paragraph = section.AddParagraph();
 			paragraph.ApplyStyle(BuiltinStyle.Heading1);
 			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
 			paragraph.AppendText(value.Name);
+			section = document.AddSection();
+			section.BreakCode = SectionBreakType.NoBreak;
+			section.Columns.Add(new Column(document) { Width = 2.29f * 72, Space = 2.29f * 72, });
+			section.Columns.Add(new Column(document) { Width = 2.29f * 72, Space = 2.29f * 72, });
 		}
 
 		public void BookFinish()
@@ -69,7 +84,7 @@ namespace ScriptureToolBoxComparison
 
 		public void ChapterStart(Chapter value)
 		{
-			var paragraph = section!.AddParagraph();
+			var paragraph = section.AddParagraph();
 			paragraph.ApplyStyle(BuiltinStyle.Heading3);
 			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
 			paragraph.AppendText(value.Name);
