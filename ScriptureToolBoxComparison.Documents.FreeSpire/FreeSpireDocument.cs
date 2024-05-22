@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace ScriptureToolBoxComparison
 {
 	public sealed class FreeSpireDocument : IDocument
 	{
-		public FreeSpireDocument()
+		public FreeSpireDocument(XmlNode config, string path)
 		{
 		}
 
