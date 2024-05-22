@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparison.Documents.Multiple", "ScriptureToolBoxComparison.Documents.Multiple\ScriptureToolBoxComparison.Documents.Multiple.csproj", "{4599AF13-9103-4415-A85C-9BF15632042F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparisonDownload", "ScriptureToolBoxComparisonDownload\ScriptureToolBoxComparisonDownload.csproj", "{AB99D689-843D-41B6-9166-F80FBBCADF92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureToolBoxComparisonDownload", "ScriptureToolBoxComparisonDownload\ScriptureToolBoxComparisonDownload.csproj", "{AB99D689-843D-41B6-9166-F80FBBCADF92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureToolBoxComparison.Documents.GemBox", "ScriptureToolBoxComparison.Documents.GemBox\ScriptureToolBoxComparison.Documents.GemBox.csproj", "{560A7B6F-BB47-4AF8-8835-FECCA5306E5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{AB99D689-843D-41B6-9166-F80FBBCADF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB99D689-843D-41B6-9166-F80FBBCADF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB99D689-843D-41B6-9166-F80FBBCADF92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{560A7B6F-BB47-4AF8-8835-FECCA5306E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{560A7B6F-BB47-4AF8-8835-FECCA5306E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{560A7B6F-BB47-4AF8-8835-FECCA5306E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{560A7B6F-BB47-4AF8-8835-FECCA5306E5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
