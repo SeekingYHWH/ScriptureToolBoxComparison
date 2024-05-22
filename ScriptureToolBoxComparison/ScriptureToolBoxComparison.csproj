@@ -33,7 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ScriptureToolBoxComparison.Core\ScriptureToolBoxComparison.Core.csproj" />
-    <ProjectReference Include="..\ScriptureToolBoxComparison.Documents.GemBox\ScriptureToolBoxComparison.Documents.GemBox.csproj" />
     <ProjectReference Include="..\ScriptureToolBoxComparison.Documents.HTML\ScriptureToolBoxComparison.Documents.HTML.csproj" />
     <ProjectReference Include="..\ScriptureToolBoxComparison.Documents.Multiple\ScriptureToolBoxComparison.Documents.Multiple.csproj" />
     <ProjectReference Include="..\ScriptureToolBoxComparison.Documents.TextLog\ScriptureToolBoxComparison.Documents.TextLog.csproj" />
