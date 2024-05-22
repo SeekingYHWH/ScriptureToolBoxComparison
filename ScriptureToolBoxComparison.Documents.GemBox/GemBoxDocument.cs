@@ -13,6 +13,7 @@ namespace ScriptureToolBoxComparison
 	{
 		static GemBoxDocument()
 		{
+			//Free version only allows 20 Paragraph's
 			ComponentInfo.SetLicense("FREE-LIMITED-KEY");
 		}
 
@@ -31,14 +32,14 @@ namespace ScriptureToolBoxComparison
 			this.path = path;
 
 			this.document = new DocumentModel();
-			var heading1 = (CharacterStyle)Style.CreateStyle(StyleTemplateType.Heading1, document);
+			var heading1 = Style.CreateStyle(StyleTemplateType.Heading1, document);
 			//heading1.CharacterFormat = new CharacterFormat() { };
 			document.Styles.Add(heading1);
-			var heading3 = (CharacterStyle)Style.CreateStyle(StyleTemplateType.Heading3, document);
+			var heading3 = Style.CreateStyle(StyleTemplateType.Heading3, document);
 			//heading3.CharacterFormat = new CharacterFormat() { };
 			document.Styles.Add(heading3);
-			this.book = new CharacterFormat() { Style = heading1, };
-			this.chapter = new CharacterFormat() { Style = heading3, };
+			this.book = new CharacterFormat();// { Style = heading1, };
+			this.chapter = new CharacterFormat();// { Style = heading3, };
 			this.delete = new CharacterFormat() { Bold = false, Strikethrough = true, };
 			this.insert = new CharacterFormat() { Bold = true, Strikethrough = false, };
 			this.normal = new CharacterFormat() { Bold = false, Strikethrough = false, };
