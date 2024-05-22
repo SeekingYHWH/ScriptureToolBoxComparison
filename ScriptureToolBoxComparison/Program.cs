@@ -38,6 +38,7 @@ namespace ScriptureToolBoxComparison
 		{
 			var name = "Bible";
 			document = new MultipleDocument(
+				new GemBoxDocument(new XmlDocument().DocumentElement, name + ".docx"),
 				new HTMLDocument(new XmlDocument().DocumentElement, name + ".html"),
 				new TextLog(new XmlDocument().DocumentElement, name + ".log"),
 				new XMLLog(new XmlDocument().DocumentElement, name + ".xml"));
