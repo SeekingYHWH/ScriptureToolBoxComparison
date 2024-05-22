@@ -71,8 +71,6 @@ namespace ScriptureToolBoxComparison
 			run.CharacterFormat = delete.Clone();
 			run.Text = value.Name;
 			paragraph.Inlines.Add(run);
-			paragraph = new Paragraph(document);
-			section.Blocks.Add(paragraph);
 		}
 
 		public void BookFinish()
@@ -81,10 +79,14 @@ namespace ScriptureToolBoxComparison
 
 		public void ChapterStart(Chapter value)
 		{
+			paragraph = new Paragraph(document);
+			section.Blocks.Add(paragraph);
 			var run = new Run(document);
 			run.CharacterFormat = chapter.Clone();
 			run.Text = value.Name;
 			paragraph.Inlines.Add(run);
+			paragraph = new Paragraph(document);
+			section.Blocks.Add(paragraph);
 		}
 
 		public void ChapterFinish()
