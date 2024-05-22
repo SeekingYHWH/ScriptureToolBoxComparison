@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FreeSpire.Doc" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ScriptureToolBoxComparison.Core\ScriptureToolBoxComparison.Core.csproj" />
   </ItemGroup>
 
