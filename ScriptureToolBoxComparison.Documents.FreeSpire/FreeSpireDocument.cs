@@ -5,17 +5,20 @@ using System.Xml;
 
 using Spire.Doc;
 using Spire.Doc.Documents;
+using Spire.Doc.Formatting;
 
 namespace ScriptureToolBoxComparison
 {
 	/// <summary>
 	/// Limit of 500 paragraphs
-	/// Cannot handle different text types
 	/// </summary>
 	public sealed class FreeSpireDocument : IDocument
 	{
 		private readonly string path;
 		private Document? document;
+		private CharacterFormat delete;
+		private CharacterFormat insert;
+		private CharacterFormat normal;
 		private Section? section;
 		private Paragraph chapter;
 
@@ -24,6 +27,9 @@ namespace ScriptureToolBoxComparison
 			this.path = path;
 
 			this.document = new Document();
+			this.delete = new CharacterFormat(document) { Bold = false, IsStrikeout = true, DoubleStrike = true, };
+			this.insert = new CharacterFormat(document) { Bold = true, IsStrikeout = false, DoubleStrike = false, };
+			this.normal = new CharacterFormat(document) { Bold = false, IsStrikeout = false, DoubleStrike = false, };
 			this.section = document.AddSection();
 		}
 
@@ -47,7 +53,6 @@ namespace ScriptureToolBoxComparison
             document.SaveToFile(path, FileFormat.Docx2019);
 
 			document = null;
-			section = null;
 		}
 
 		public void BookStart(Book value)
@@ -77,17 +82,20 @@ namespace ScriptureToolBoxComparison
 
 		public void WriteDelete(string value)
 		{
-			chapter.AppendText(value);
+			var range = chapter.AppendText(value);
+			range.ApplyCharacterFormat(delete);
 		}
 
 		public void WriteInsert(string value)
 		{
-			chapter.AppendText(value);
+			var range = chapter.AppendText(value);
+			range.ApplyCharacterFormat(insert);
 		}
 
 		public void WriteNormal(string value)
 		{
-			chapter.AppendText(value);
+			var range = chapter.AppendText(value);
+			range.ApplyCharacterFormat(normal);
 		}
 	}
 }
