@@ -59,7 +59,7 @@ namespace ScriptureToolBoxComparison
 		{
 			var paragraph = section!.AddParagraph();
 			paragraph.ApplyStyle(BuiltinStyle.Heading1);
-			paragraph.Format.TextAlignment = TextAlignment.Center;
+			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
 			paragraph.AppendText(value.Name);
 		}
 
@@ -71,7 +71,7 @@ namespace ScriptureToolBoxComparison
 		{
 			var paragraph = section!.AddParagraph();
 			paragraph.ApplyStyle(BuiltinStyle.Heading3);
-			paragraph.Format.TextAlignment = TextAlignment.Center;
+			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
 			paragraph.AppendText(value.Name);
 			chapter = section.AddParagraph();
 		}
