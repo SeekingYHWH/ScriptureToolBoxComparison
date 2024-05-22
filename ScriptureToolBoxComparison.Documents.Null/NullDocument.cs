@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace ScriptureToolBoxComparison
 {
 	public sealed class NullDocument : IDocument
 	{
-		public NullDocument()
+		public NullDocument(XmlNode config, string path)
 		{
 		}
 
