@@ -122,9 +122,21 @@ namespace ScriptureToolBoxComparison
 		{
 			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
 
+			var oh = section.HeadersFooters.OddHeader.AddParagraph();
+			oh.Format.HorizontalAlignment = HorizontalAlignment.Right;
+			oh.AppendField("Heading 1", FieldType.FieldStyleRef);
+			oh.AppendText(" ");
+			oh.AppendField("Heading 3", FieldType.FieldStyleRef);
+
 			var of = section.HeadersFooters.OddFooter.AddParagraph();
 			of.Format.HorizontalAlignment = HorizontalAlignment.Right;
 			of.AppendField("page number", FieldType.FieldPage);
+
+			var eh = section.HeadersFooters.EvenHeader.AddParagraph();
+			eh.Format.HorizontalAlignment = HorizontalAlignment.Left;
+			eh.AppendField("Heading 1", FieldType.FieldStyleRef);
+			eh.AppendText(" ");
+			eh.AppendField("Heading 3", FieldType.FieldStyleRef);
 
 			var ef = section.HeadersFooters.EvenFooter.AddParagraph();
 			ef.Format.HorizontalAlignment = HorizontalAlignment.Left;
