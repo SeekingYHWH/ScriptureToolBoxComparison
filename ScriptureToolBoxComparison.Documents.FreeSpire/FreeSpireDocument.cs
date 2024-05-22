@@ -36,7 +36,6 @@ namespace ScriptureToolBoxComparison
 			
 			//Table of Contents
 			var paragraph = section.AddParagraph();
-			paragraph.ApplyStyle(BuiltinStyle.Heading1);
 			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
 			paragraph.AppendText("Contents");
 			paragraph = section.AddParagraph();
