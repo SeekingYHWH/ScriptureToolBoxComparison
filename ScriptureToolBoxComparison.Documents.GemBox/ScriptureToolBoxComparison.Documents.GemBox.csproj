@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GemBox.Document" Version="35.0.1749" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ScriptureToolBoxComparison.Core\ScriptureToolBoxComparison.Core.csproj" />
   </ItemGroup>
 

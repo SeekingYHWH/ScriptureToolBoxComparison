@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
+using GemBox.Document;
+
 namespace ScriptureToolBoxComparison
 {
 	public class GemBoxDocument : IDocument
 	{
+		static GemBoxDocument()
+		{
+			ComponentInfo.SetLicense("FREE-LIMITED-KEY");
+		}
+
 		public GemBoxDocument(XmlNode config, string path)
 		{
 		}
