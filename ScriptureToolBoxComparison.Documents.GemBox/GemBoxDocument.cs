@@ -7,7 +7,7 @@ namespace ScriptureToolBoxComparison
 {
 	public class GemBoxDocument : IDocument
 	{
-		public GemBoxDocument()
+		public GemBoxDocument(XmlNode config, string path)
 		{
 		}
 
