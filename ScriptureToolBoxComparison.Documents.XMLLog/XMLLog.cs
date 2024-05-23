@@ -17,6 +17,8 @@ namespace ScriptureToolBoxComparison
 			this.writer = new XmlTextWriter(writerText);
 			this.writer.Formatting = Formatting.Indented;
 			this.writer.IndentChar = '\t';
+
+			writer.WriteStartElement("Log");
 		}
 
 		~XMLLog()
@@ -31,6 +33,7 @@ namespace ScriptureToolBoxComparison
 
 		private void Dispose(bool disposing)
 		{
+			writer.WriteEndElement();
 			writer.Dispose();
 		}
 
