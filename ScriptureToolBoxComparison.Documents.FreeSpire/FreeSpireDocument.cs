@@ -142,6 +142,7 @@ namespace ScriptureToolBoxComparison
 
 		private void CreateHeaderFooter()
 		{
+			section.HeadersFooters.LinkToPrevious = false;
 			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
 
 			var oh = section.HeadersFooters.OddHeader.AddParagraph();
@@ -176,6 +177,7 @@ namespace ScriptureToolBoxComparison
 			section.BreakCode = SectionBreakType.NoBreak;
 
 			section = document.AddSection();
+			section.HeadersFooters.LinkToPrevious = false;
 			section.BreakCode = SectionBreakType.NewPage;
 			var paragraph = section.AddParagraph();
 			paragraph.AppendBreak(BreakType.PageBreak);
