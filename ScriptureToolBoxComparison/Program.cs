@@ -131,6 +131,7 @@ namespace ScriptureToolBoxComparison
 			}
 			finally
 			{
+				Console.WriteLine("CLOSING");
 				document?.Dispose();
 			}
 			return 0;
