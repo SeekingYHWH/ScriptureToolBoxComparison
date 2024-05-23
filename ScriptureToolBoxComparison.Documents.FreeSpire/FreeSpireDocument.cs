@@ -142,6 +142,9 @@ namespace ScriptureToolBoxComparison
 
 		private void ConfigBody()
 		{
+			section.PageSetup.RestartPageNumbering = true;
+			section.PageSetup.PageStartingNumber = 1;
+
 			section.HeadersFooters.LinkToPrevious = false;
 			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
 
