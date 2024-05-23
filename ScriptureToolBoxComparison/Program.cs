@@ -30,7 +30,9 @@ namespace ScriptureToolBoxComparison
 		private static HttpClient client;
 		private static IDocument document;
 		private static IOrder order = new SortOrder();
+		private static string pre;
 		private static readonly List<Book> books = new List<Book>();
+		private static string post;
 		#endregion //Fields
 
 		#region Methods
@@ -100,6 +102,12 @@ namespace ScriptureToolBoxComparison
 		{
 			try
 			{
+				if (!string.IsNullOrWhiteSpace(pre))
+				{
+					Console.WriteLine("[PRE]");
+					XMLSource(pre);
+				}
+				Console.WriteLine("[SOURCE]");
 				for (var b = 0; b < books.Count; ++b)
 				{
 					var book = books[b];
@@ -123,6 +131,11 @@ namespace ScriptureToolBoxComparison
 					}
 					document.BookFinish();
 				}
+				if (!string.IsNullOrWhiteSpace(post))
+				{
+					Console.WriteLine("[POST]");
+					XMLSource(post);
+				}
 			}
 			catch (Exception exception)
 			{
@@ -131,10 +144,58 @@ namespace ScriptureToolBoxComparison
 			}
 			finally
 			{
-				Console.WriteLine("CLOSING");
+				Console.WriteLine("[CLOSING]");
 				document?.Dispose();
 			}
 			return 0;
+		}
+
+		private static void XMLSource(string path)
+		{
+			var doc = new XmlDocument();
+			doc.Load(path);
+			var config = doc.DocumentElement;
+			foreach (XmlNode bookConfig in config.SelectNodes("Book"))
+			{
+				var bookName = bookConfig.Attributes["Name"].InnerText;
+				Console.WriteLine(bookName);
+				var book = new Book(bookName);
+				document.BookStart(book);
+				foreach (XmlNode chapterConfig in bookConfig.SelectNodes("Chapter"))
+				{
+					var chapterName = chapterConfig.Attributes["Name"].InnerText;
+					Console.Write('\t');
+					Console.WriteLine(chapterName);
+					var chapter = new Chapter(chapterName);
+					document.ChapterStart(chapter);
+					order.ChapterStart(chapter);
+					foreach (XmlNode node in chapterConfig.ChildNodes)
+					{
+						var value = node.InnerText;
+						switch (node.Name)
+						{
+						case "Delete":
+							WriteDelete(value, 0, value.Length);
+							break;
+
+						case "Insert":
+							WriteInsert(value, 0, value.Length);
+							break;
+
+						case "Normal":
+							WriteNormal(value, 0, value.Length);
+							break;
+
+						case "Barrier":
+							order.Barrier();
+							break;
+						}
+					}
+					order.ChapterFinish();
+					document.ChapterFinish();
+				}
+				document.BookFinish();
+			}
 		}
 
 		private static void ParseChapter(StreamReader reader)
