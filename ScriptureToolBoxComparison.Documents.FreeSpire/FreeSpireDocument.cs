@@ -77,8 +77,8 @@ namespace ScriptureToolBoxComparison
 			paragraph.AppendText(value.Name);
 			section = document.AddSection();
 			section.BreakCode = SectionBreakType.NoBreak;
-			section.Columns.Add(new Column(document) { Width = 2.29f * 72, Space = 2.29f * 72, });
-			section.Columns.Add(new Column(document) { Width = 2.29f * 72, Space = 2.29f * 72, });
+			section.Columns.Add(new Column(document) { Width = 2.2f * 72, Space = 2.1f * 72, });
+			section.Columns.Add(new Column(document) { Width = 2.2f * 72, Space = 2.1f * 72, });
 		}
 
 		public void BookFinish()
@@ -122,6 +122,9 @@ namespace ScriptureToolBoxComparison
 			section = document.AddSection();
 			section.BreakCode = SectionBreakType.NewPage;
 
+			//Margins
+			ConfigMargins(section.PageSetup.Margins);
+
 			//Headers
 			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
 
@@ -160,6 +163,9 @@ namespace ScriptureToolBoxComparison
 
 		private void ConfigBody()
 		{
+			//Margins
+			ConfigMargins(section.PageSetup.Margins);
+
 			//Numbers
 			section.PageSetup.RestartPageNumbering = true;
 			section.PageSetup.PageStartingNumber = 1;
@@ -202,8 +208,19 @@ namespace ScriptureToolBoxComparison
 			section = document.AddSection();
 			section.HeadersFooters.LinkToPrevious = false;
 			section.BreakCode = SectionBreakType.NewPage;
+			//Margins
+			ConfigMargins(section.PageSetup.Margins);
+
 			var paragraph = section.AddParagraph();
 			paragraph.AppendBreak(BreakType.PageBreak);
+		}
+
+		private void ConfigMargins(MarginsF margins)
+		{
+			margins.Top = 0.75f * 72;
+			margins.Bottom = 0.75f * 72;
+			margins.Left = 0.75f * 72;
+			margins.Right = 0.75f * 72;
 		}
 	}
 }
