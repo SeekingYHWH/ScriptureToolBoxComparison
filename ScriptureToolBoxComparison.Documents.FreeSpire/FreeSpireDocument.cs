@@ -64,7 +64,7 @@ namespace ScriptureToolBoxComparison
 			{
 				section = document.AddSection();
 				section.BreakCode = SectionBreakType.NewPage;
-				CreateHeaderFooter();
+				ConfigBody();
 			}
 			else
 			{
@@ -140,7 +140,7 @@ namespace ScriptureToolBoxComparison
 			section = null;
 		}
 
-		private void CreateHeaderFooter()
+		private void ConfigBody()
 		{
 			section.HeadersFooters.LinkToPrevious = false;
 			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
