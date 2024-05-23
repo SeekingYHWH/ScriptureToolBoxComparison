@@ -135,6 +135,7 @@ namespace ScriptureToolBoxComparison
 			paragraph = section.AddParagraph();
 			var toc = paragraph.AppendTOC(1, 2);
 			paragraph.AppendBreak(BreakType.PageBreak);
+			paragraph.AppendBreak(BreakType.PageBreak);
 
 			//Prepare
 			section = null;
