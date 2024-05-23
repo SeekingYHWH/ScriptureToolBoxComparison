@@ -122,6 +122,21 @@ namespace ScriptureToolBoxComparison
 			section = document.AddSection();
 			section.BreakCode = SectionBreakType.NewPage;
 
+			//Headers
+			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
+
+			var oh = section.HeadersFooters.OddHeader.AddParagraph();
+			oh.Format.HorizontalAlignment = HorizontalAlignment.Right;
+
+			var of = section.HeadersFooters.OddFooter.AddParagraph();
+			of.Format.HorizontalAlignment = HorizontalAlignment.Right;
+
+			var eh = section.HeadersFooters.EvenHeader.AddParagraph();
+			eh.Format.HorizontalAlignment = HorizontalAlignment.Left;
+
+			var ef = section.HeadersFooters.EvenFooter.AddParagraph();
+			ef.Format.HorizontalAlignment = HorizontalAlignment.Left;
+
 			//Intro
 			var paragraph = section.AddParagraph();
 			paragraph.AppendBreak(BreakType.PageBreak);
@@ -143,9 +158,11 @@ namespace ScriptureToolBoxComparison
 
 		private void ConfigBody()
 		{
+			//Numbers
 			section.PageSetup.RestartPageNumbering = true;
 			section.PageSetup.PageStartingNumber = 1;
 
+			//Headers
 			section.HeadersFooters.LinkToPrevious = false;
 			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
 
