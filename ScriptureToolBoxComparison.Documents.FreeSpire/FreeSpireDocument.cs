@@ -77,8 +77,8 @@ namespace ScriptureToolBoxComparison
 			paragraph.AppendText(value.Name);
 			section = document.AddSection();
 			section.BreakCode = SectionBreakType.NoBreak;
-			section.Columns.Add(new Column(document) { Width = 2.2f * 72, Space = 2.1f * 72, });
-			section.Columns.Add(new Column(document) { Width = 2.2f * 72, Space = 2.1f * 72, });
+			section.Columns.Add(new Column(document) { Width = 2.26f * 72, Space = 2.25f * 72, });
+			section.Columns.Add(new Column(document) { Width = 2.26f * 72, Space = 2.25f * 72, });
 		}
 
 		public void BookFinish()
