@@ -9,6 +9,11 @@ namespace ScriptureToolBoxComparison
 		private readonly string name;
 		private readonly Chapter[] chapters;
 
+		public Book(string name)
+		{
+			this.name = name;
+		}
+
 		public Book(string name, Chapter[] chapters)
 		{
 			this.name = name;
