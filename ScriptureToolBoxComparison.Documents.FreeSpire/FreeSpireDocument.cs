@@ -88,7 +88,7 @@ namespace ScriptureToolBoxComparison
 		public void ChapterStart(Chapter value)
 		{
 			var paragraph = section.AddParagraph();
-			paragraph.ApplyStyle(BuiltinStyle.Heading3);
+			paragraph.ApplyStyle(BuiltinStyle.Heading4);
 			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
 			paragraph.AppendText(value.Name);
 			chapter = section.AddParagraph();
@@ -172,7 +172,7 @@ namespace ScriptureToolBoxComparison
 			oh.Format.HorizontalAlignment = HorizontalAlignment.Right;
 			var oh1 = oh.AppendField("Heading 1", FieldType.FieldStyleRef);
 			oh.AppendText(" ");
-			oh.AppendField("Heading 3", FieldType.FieldStyleRef);
+			oh.AppendField("Heading 4", FieldType.FieldStyleRef);
 
 			var of = section.HeadersFooters.OddFooter.FirstParagraph;
 			of.Format.HorizontalAlignment = HorizontalAlignment.Right;
@@ -182,7 +182,7 @@ namespace ScriptureToolBoxComparison
 			eh.Format.HorizontalAlignment = HorizontalAlignment.Left;
 			eh.AppendField("Heading 1", FieldType.FieldStyleRef);
 			eh.AppendText(" ");
-			eh.AppendField("Heading 3", FieldType.FieldStyleRef);
+			eh.AppendField("Heading 4", FieldType.FieldStyleRef);
 
 			var ef = section.HeadersFooters.EvenFooter.FirstParagraph;
 			ef.Format.HorizontalAlignment = HorizontalAlignment.Left;
