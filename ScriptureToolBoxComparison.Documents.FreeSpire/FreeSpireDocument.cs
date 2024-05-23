@@ -31,40 +31,7 @@ namespace ScriptureToolBoxComparison
 			this.insert = new CharacterFormat(document) { Bold = true, IsStrikeout = false, DoubleStrike = false, };
 			this.normal = new CharacterFormat(document) { Bold = false, IsStrikeout = false, DoubleStrike = false, };
 
-			section = document.AddSection();
-			section.BreakCode = SectionBreakType.NewPage;
-			
-			//Table of Contents
-			var paragraph = section.AddParagraph();
-			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
-			paragraph.AppendText("Contents");
-			paragraph = section.AddParagraph();
-			var toc = paragraph.AppendTOC(1, 2);
-			paragraph.AppendBreak(BreakType.PageBreak);
-
-			//Header & Footer
-			section.PageSetup.DifferentFirstPageHeaderFooter = true;
-			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
-
-			var oh = section.HeadersFooters.OddHeader.AddParagraph();
-			oh.Format.HorizontalAlignment = HorizontalAlignment.Right;
-			var oh1 = oh.AppendField("Heading 1", FieldType.FieldStyleRef);
-			oh.AppendText(" ");
-			oh.AppendField("Heading 3", FieldType.FieldStyleRef);
-
-			var of = section.HeadersFooters.OddFooter.AddParagraph();
-			of.Format.HorizontalAlignment = HorizontalAlignment.Right;
-			of.AppendField("page number", FieldType.FieldPage);
-
-			var eh = section.HeadersFooters.EvenHeader.AddParagraph();
-			eh.Format.HorizontalAlignment = HorizontalAlignment.Left;
-			eh.AppendField("Heading 1", FieldType.FieldStyleRef);
-			eh.AppendText(" ");
-			eh.AppendField("Heading 3", FieldType.FieldStyleRef);
-
-			var ef = section.HeadersFooters.EvenFooter.AddParagraph();
-			ef.Format.HorizontalAlignment = HorizontalAlignment.Left;
-			ef.AppendField("page number", FieldType.FieldPage);
+			CreateStart();
 		}
 
 		~FreeSpireDocument()
@@ -84,8 +51,7 @@ namespace ScriptureToolBoxComparison
 				return;
             }
 
-			section = document.AddSection();
-			section.BreakCode = SectionBreakType.NoBreak;
+			CreateEnding();
 			document.UpdateTOCPageNumbers();
 			document.SaveToFile(path, FileFormat.Docx2019);
 
@@ -94,8 +60,17 @@ namespace ScriptureToolBoxComparison
 
 		public void BookStart(Book value)
 		{
-			section = document.AddSection();
-			section.BreakCode = SectionBreakType.NoBreak;
+			if (section == null)
+			{
+				section = document.AddSection();
+				section.BreakCode = SectionBreakType.NewPage;
+				CreateHeaderFooter();
+			}
+			else
+			{
+				section = document.AddSection();
+				section.BreakCode = SectionBreakType.NoBreak;
+			}
 			var paragraph = section.AddParagraph();
 			paragraph.ApplyStyle(BuiltinStyle.Heading1);
 			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
@@ -142,8 +117,68 @@ namespace ScriptureToolBoxComparison
 			range.ApplyCharacterFormat(normal);
 		}
 
+		private void CreateStart()
+		{
+			section = document.AddSection();
+			section.BreakCode = SectionBreakType.NewPage;
+
+			//Intro
+			var paragraph = section.AddParagraph();
+			paragraph.AppendBreak(BreakType.PageBreak);
+			paragraph = section.AddParagraph();
+			paragraph.AppendBreak(BreakType.PageBreak);
+
+			//Table of Contents
+			paragraph = section.AddParagraph();
+			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
+			paragraph.AppendText("Contents");
+			paragraph = section.AddParagraph();
+			var toc = paragraph.AppendTOC(1, 2);
+			paragraph.AppendBreak(BreakType.PageBreak);
+
+			//Prepare
+			section = null;
+		}
+
 		private void CreateHeaderFooter()
 		{
+			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
+
+			var oh = section.HeadersFooters.OddHeader.AddParagraph();
+			oh.Format.HorizontalAlignment = HorizontalAlignment.Right;
+			var oh1 = oh.AppendField("Heading 1", FieldType.FieldStyleRef);
+			oh.AppendText(" ");
+			oh.AppendField("Heading 3", FieldType.FieldStyleRef);
+
+			var of = section.HeadersFooters.OddFooter.AddParagraph();
+			of.Format.HorizontalAlignment = HorizontalAlignment.Right;
+			of.AppendField("page number", FieldType.FieldPage);
+
+			var eh = section.HeadersFooters.EvenHeader.AddParagraph();
+			eh.Format.HorizontalAlignment = HorizontalAlignment.Left;
+			eh.AppendField("Heading 1", FieldType.FieldStyleRef);
+			eh.AppendText(" ");
+			eh.AppendField("Heading 3", FieldType.FieldStyleRef);
+
+			var ef = section.HeadersFooters.EvenFooter.AddParagraph();
+			ef.Format.HorizontalAlignment = HorizontalAlignment.Left;
+			ef.AppendField("page number", FieldType.FieldPage);
+		}
+
+		private void CreateEnding()
+		{
+			if (section == null)
+			{
+				return;
+			}
+
+			section = document.AddSection();
+			section.BreakCode = SectionBreakType.NoBreak;
+
+			section = document.AddSection();
+			section.BreakCode = SectionBreakType.NewPage;
+			var paragraph = section.AddParagraph();
+			paragraph.AppendBreak(BreakType.PageBreak);
 		}
 	}
 }
