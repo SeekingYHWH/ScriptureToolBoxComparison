@@ -27,7 +27,7 @@ namespace ScriptureToolBoxComparison
 			this.path = path;
 
 			this.document = new Document();
-			this.delete = new CharacterFormat(document) { Bold = false, IsStrikeout = true, DoubleStrike = true, };
+			this.delete = new CharacterFormat(document) { Bold = false, IsStrikeout = true, DoubleStrike = false, };
 			this.insert = new CharacterFormat(document) { Bold = true, IsStrikeout = false, DoubleStrike = false, };
 			this.normal = new CharacterFormat(document) { Bold = false, IsStrikeout = false, DoubleStrike = false, };
 
