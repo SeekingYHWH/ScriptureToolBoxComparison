@@ -11,6 +11,9 @@
     <None Include="..\ScriptureToolBoxComparison.Core\Bible.config" Link="Bible.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\ScriptureToolBoxComparison.Core\Joseph.config" Link="Joseph.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="..\ScriptureToolBoxComparison.Core\NK.config" Link="NK.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

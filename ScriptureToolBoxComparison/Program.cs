@@ -45,6 +45,7 @@ namespace ScriptureToolBoxComparison
 				new HTMLDocument(new XmlDocument().DocumentElement, name + ".html"),
 				new TextLog(new XmlDocument().DocumentElement, name + ".log"),
 				new XMLLog(new XmlDocument().DocumentElement, name + ".xml"));
+			pre = "Joseph.config";
 			BooksFactory.LoadBooks(books, name + ".config");
 
 			return null;

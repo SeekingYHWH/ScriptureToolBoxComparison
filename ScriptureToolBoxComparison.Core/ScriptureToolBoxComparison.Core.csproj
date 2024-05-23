@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="Joseph.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Torah.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
