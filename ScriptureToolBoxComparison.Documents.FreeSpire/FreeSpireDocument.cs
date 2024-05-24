@@ -24,6 +24,7 @@ namespace ScriptureToolBoxComparison
 
 		public FreeSpireDocument(XmlNode config, string path)
 		{
+			//TODO: Get settings from config
 			this.path = path;
 
 			this.document = new Document();
