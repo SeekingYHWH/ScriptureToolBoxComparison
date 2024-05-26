@@ -17,6 +17,7 @@ namespace ScriptureToolBoxComparison
 		private readonly string path;
 		private Document document;
 		private string fontName;
+		private float fontSize;
 		private CharacterFormat delete;
 		private CharacterFormat insert;
 		private CharacterFormat normal;
@@ -32,9 +33,10 @@ namespace ScriptureToolBoxComparison
 			document.EmbedFontsInFile = true;
 
 			this.fontName = "Times New Roman";
-			this.delete = new CharacterFormat(document) { Bold = false, IsStrikeout = true, DoubleStrike = false, FontName = fontName, FontSize = 12, };
-			this.insert = new CharacterFormat(document) { Bold = true, IsStrikeout = false, DoubleStrike = false, FontName = fontName, FontSize = 12, };
-			this.normal = new CharacterFormat(document) { Bold = false, IsStrikeout = false, DoubleStrike = false, FontName = fontName, FontSize = 12, };
+			this.fontSize = 12;
+			this.delete = new CharacterFormat(document) { Bold = false, IsStrikeout = true, DoubleStrike = false, FontName = fontName, FontSize = fontSize, };
+			this.insert = new CharacterFormat(document) { Bold = true, IsStrikeout = false, DoubleStrike = false, FontName = fontName, FontSize = fontSize, };
+			this.normal = new CharacterFormat(document) { Bold = false, IsStrikeout = false, DoubleStrike = false, FontName = fontName, FontSize = fontSize, };
 
 			CreateStart();
 		}
@@ -190,29 +192,37 @@ namespace ScriptureToolBoxComparison
 			oh.Format.HorizontalAlignment = HorizontalAlignment.Right;
 			var oh1 = oh.AppendField("Heading 1", FieldType.FieldStyleRef);
 			oh1.CharacterFormat.FontName = fontName;
+			oh1.CharacterFormat.FontSize = fontSize;
 			var ohs = oh.AppendText(" ");
 			ohs.CharacterFormat.FontName = fontName;
+			ohs.CharacterFormat.FontSize = fontSize;
 			var oh4 = oh.AppendField("Heading 4", FieldType.FieldStyleRef);
 			oh4.CharacterFormat.FontName = fontName;
+			oh4.CharacterFormat.FontSize = fontSize;
 
 			var of = section.HeadersFooters.OddFooter.FirstParagraph;
 			of.Format.HorizontalAlignment = HorizontalAlignment.Right;
 			var ofp = of.AppendField("page number", FieldType.FieldPage);
 			ofp.CharacterFormat.FontName = fontName;
+			ofp.CharacterFormat.FontSize = fontSize;
 
 			var eh = section.HeadersFooters.EvenHeader.FirstParagraph;
 			eh.Format.HorizontalAlignment = HorizontalAlignment.Left;
 			var eh1 = eh.AppendField("Heading 1", FieldType.FieldStyleRef);
 			eh1.CharacterFormat.FontName = fontName;
+			eh1.CharacterFormat.FontSize = fontSize;
 			var ehs = eh.AppendText(" ");
 			ehs.CharacterFormat.FontName= fontName;
+			ehs.CharacterFormat.FontSize = fontSize;
 			var eh4 = eh.AppendField("Heading 4", FieldType.FieldStyleRef);
 			eh4.CharacterFormat.FontName = fontName;
+			eh4.CharacterFormat.FontSize = fontSize;
 
 			var ef = section.HeadersFooters.EvenFooter.FirstParagraph;
 			ef.Format.HorizontalAlignment = HorizontalAlignment.Left;
 			var efp = ef.AppendField("page number", FieldType.FieldPage);
 			efp.CharacterFormat.FontName = fontName;
+			efp.CharacterFormat.FontSize = fontSize;
 		}
 
 		private void CreateEnding()
