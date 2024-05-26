@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Xml;
 
@@ -26,11 +23,10 @@ namespace ScriptureToolBoxComparison
 		#endregion //Main
 
 		#region Fields
-		private static Uri server = new Uri("https://scripturetoolbox.com/html/ic/");
-		private static HttpClient client;
 		private static IDocument document;
 		private static IOrder order = new SortOrder();
 		private static string pre;
+		private static ISource source;
 		private static readonly List<Book> books = new List<Book>();
 		private static string post;
 		#endregion //Fields
@@ -46,6 +42,7 @@ namespace ScriptureToolBoxComparison
 				new TextLog(new XmlDocument().DocumentElement, name + ".log"),
 				new XMLLog(new XmlDocument().DocumentElement, name + ".xml"));
 			pre = "Joseph.config";
+			source = new WebSource(new Uri("https://scripturetoolbox.com/html/ic/"));
 			BooksFactory.LoadBooks(books, name + ".config");
 
 			return null;
@@ -73,25 +70,9 @@ namespace ScriptureToolBoxComparison
 		{
 			Console.Title = "ScriptureToolBoxComparison";
 
-			PrepareClient();
 			PrepareOrder();
 
 			GC.Collect();
-		}
-
-		private static void PrepareClient()
-		{
-			var handler = new HttpClientHandler()
-			{
-				AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-			};
-			client = new HttpClient(handler);
-			client.BaseAddress = server;
-			var headers = client.DefaultRequestHeaders;
-			headers.Add("Host", server.Host);
-			headers.Add("Connection", "Keep-Alive");
-			headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-			headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
 		}
 
 		private static void PrepareOrder()
@@ -122,7 +103,7 @@ namespace ScriptureToolBoxComparison
 						Console.WriteLine(chapter.Name);
 						document.ChapterStart(chapter);
 						order.ChapterStart(chapter);
-						using (var readerStream = client.GetStreamAsync(chapter.Source).Result)
+						using (var readerStream = source.GetStream(chapter))
 						using (var reader = new StreamReader(readerStream))
 						{
 							ParseChapter(reader);
