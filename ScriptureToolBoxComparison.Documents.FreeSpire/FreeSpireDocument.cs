@@ -16,6 +16,7 @@ namespace ScriptureToolBoxComparison
 	{
 		private readonly string path;
 		private Document document;
+		private string fontName;
 		private CharacterFormat delete;
 		private CharacterFormat insert;
 		private CharacterFormat normal;
@@ -28,9 +29,12 @@ namespace ScriptureToolBoxComparison
 			this.path = path;
 
 			this.document = new Document();
-			this.delete = new CharacterFormat(document) { Bold = false, IsStrikeout = true, DoubleStrike = false, };
-			this.insert = new CharacterFormat(document) { Bold = true, IsStrikeout = false, DoubleStrike = false, };
-			this.normal = new CharacterFormat(document) { Bold = false, IsStrikeout = false, DoubleStrike = false, };
+			document.EmbedFontsInFile = true;
+
+			this.fontName = "Times New Roman";
+			this.delete = new CharacterFormat(document) { Bold = false, IsStrikeout = true, DoubleStrike = false, FontName = fontName, FontSize = 12, };
+			this.insert = new CharacterFormat(document) { Bold = true, IsStrikeout = false, DoubleStrike = false, FontName = fontName, FontSize = 12, };
+			this.normal = new CharacterFormat(document) { Bold = false, IsStrikeout = false, DoubleStrike = false, FontName = fontName, FontSize = 12, };
 
 			CreateStart();
 		}
@@ -75,7 +79,8 @@ namespace ScriptureToolBoxComparison
 			var paragraph = section.AddParagraph();
 			paragraph.ApplyStyle(BuiltinStyle.Heading1);
 			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
-			paragraph.AppendText(value.Name);
+			var range = paragraph.AppendText(value.Name);
+			range.CharacterFormat.FontName = fontName;
 			section = document.AddSection();
 			section.BreakCode = SectionBreakType.NoBreak;
 			section.Columns.Add(new Column(document) { Width = 2.26f * 72, Space = 2.25f * 72, });
@@ -91,7 +96,8 @@ namespace ScriptureToolBoxComparison
 			var paragraph = section.AddParagraph();
 			paragraph.ApplyStyle(BuiltinStyle.Heading4);
 			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
-			paragraph.AppendText(value.Name);
+			var range = paragraph.AppendText(value.Name);
+			range.CharacterFormat.FontName = fontName;
 			chapter = section.AddParagraph();
 			chapter.Format.HorizontalAlignment = HorizontalAlignment.Justify;
 		}
