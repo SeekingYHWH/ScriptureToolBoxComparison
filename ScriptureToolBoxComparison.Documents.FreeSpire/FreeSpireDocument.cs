@@ -189,22 +189,30 @@ namespace ScriptureToolBoxComparison
 			var oh = section.HeadersFooters.OddHeader.FirstParagraph;
 			oh.Format.HorizontalAlignment = HorizontalAlignment.Right;
 			var oh1 = oh.AppendField("Heading 1", FieldType.FieldStyleRef);
-			oh.AppendText(" ");
-			oh.AppendField("Heading 4", FieldType.FieldStyleRef);
+			oh1.CharacterFormat.FontName = fontName;
+			var ohs = oh.AppendText(" ");
+			ohs.CharacterFormat.FontName = fontName;
+			var oh4 = oh.AppendField("Heading 4", FieldType.FieldStyleRef);
+			oh4.CharacterFormat.FontName = fontName;
 
 			var of = section.HeadersFooters.OddFooter.FirstParagraph;
 			of.Format.HorizontalAlignment = HorizontalAlignment.Right;
-			of.AppendField("page number", FieldType.FieldPage);
+			var ofp = of.AppendField("page number", FieldType.FieldPage);
+			ofp.CharacterFormat.FontName = fontName;
 
 			var eh = section.HeadersFooters.EvenHeader.FirstParagraph;
 			eh.Format.HorizontalAlignment = HorizontalAlignment.Left;
-			eh.AppendField("Heading 1", FieldType.FieldStyleRef);
-			eh.AppendText(" ");
-			eh.AppendField("Heading 4", FieldType.FieldStyleRef);
+			var eh1 = eh.AppendField("Heading 1", FieldType.FieldStyleRef);
+			eh1.CharacterFormat.FontName = fontName;
+			var ehs = eh.AppendText(" ");
+			ehs.CharacterFormat.FontName= fontName;
+			var eh4 = eh.AppendField("Heading 4", FieldType.FieldStyleRef);
+			eh4.CharacterFormat.FontName = fontName;
 
 			var ef = section.HeadersFooters.EvenFooter.FirstParagraph;
 			ef.Format.HorizontalAlignment = HorizontalAlignment.Left;
-			ef.AppendField("page number", FieldType.FieldPage);
+			var efp = ef.AppendField("page number", FieldType.FieldPage);
+			efp.CharacterFormat.FontName = fontName;
 		}
 
 		private void CreateEnding()
