@@ -122,6 +122,7 @@ namespace ScriptureToolBoxComparison
 		{
 			section = document.AddSection();
 			section.BreakCode = SectionBreakType.NewPage;
+			section.PageSetup.PageSize = PageSize.Letter;
 
 			//Margins
 			ConfigMargins(section.PageSetup.Margins);
@@ -164,6 +165,9 @@ namespace ScriptureToolBoxComparison
 
 		private void ConfigBody()
 		{
+			//Letter
+			section.PageSetup.PageSize = PageSize.Letter;
+			
 			//Margins
 			ConfigMargins(section.PageSetup.Margins);
 
@@ -209,6 +213,7 @@ namespace ScriptureToolBoxComparison
 			section = document.AddSection();
 			section.HeadersFooters.LinkToPrevious = false;
 			section.BreakCode = SectionBreakType.NewPage;
+			section.PageSetup.PageSize = PageSize.Letter;
 			//Margins
 			ConfigMargins(section.PageSetup.Margins);
 
