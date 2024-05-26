@@ -159,7 +159,8 @@ namespace ScriptureToolBoxComparison
 			//Table of Contents
 			paragraph = section.AddParagraph();
 			paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center;
-			paragraph.AppendText("Contents");
+			var range = paragraph.AppendText("Contents");
+			range.ApplyCharacterFormat(normal);
 			paragraph = section.AddParagraph();
 			var toc = paragraph.AppendTOC(1, 2);
 			toc.CharacterFormat.FontName = fontName;
