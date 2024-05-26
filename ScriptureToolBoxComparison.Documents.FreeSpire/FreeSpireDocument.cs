@@ -160,6 +160,7 @@ namespace ScriptureToolBoxComparison
 			paragraph.AppendText("Contents");
 			paragraph = section.AddParagraph();
 			var toc = paragraph.AppendTOC(1, 2);
+			toc.CharacterFormat.FontName = fontName;
 			paragraph.AppendBreak(BreakType.PageBreak);
 
 			//Blank Page
