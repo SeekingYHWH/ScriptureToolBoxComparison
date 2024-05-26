@@ -42,7 +42,8 @@ namespace ScriptureToolBoxComparison
 				new TextLog(new XmlDocument().DocumentElement, name + ".log"),
 				new XMLLog(new XmlDocument().DocumentElement, name + ".xml"));
 			pre = "Joseph.config";
-			source = new WebSource(new Uri("https://scripturetoolbox.com/html/ic/"));
+			//source = new WebSource(new Uri("https://scripturetoolbox.com/html/ic/"));
+			source = new FileSource(@"..\..\..\..\Source");
 			BooksFactory.LoadBooks(books, name + ".config");
 
 			return null;
