@@ -191,38 +191,30 @@ namespace ScriptureToolBoxComparison
 			var oh = section.HeadersFooters.OddHeader.FirstParagraph;
 			oh.Format.HorizontalAlignment = HorizontalAlignment.Right;
 			var oh1 = oh.AppendField("Heading 1", FieldType.FieldStyleRef);
-			oh1.CharacterFormat.FontName = fontName;
-			oh1.CharacterFormat.FontSize = fontSize;
+			oh1.ApplyCharacterFormat(normal);
 			var ohs = oh.AppendText(" ");
-			ohs.CharacterFormat.FontName = fontName;
-			ohs.CharacterFormat.FontSize = fontSize;
+			ohs.ApplyCharacterFormat(normal);
 			var oh4 = oh.AppendField("Heading 4", FieldType.FieldStyleRef);
-			oh4.CharacterFormat.FontName = fontName;
-			oh4.CharacterFormat.FontSize = fontSize;
+			oh4.ApplyCharacterFormat(normal);
 
 			var of = section.HeadersFooters.OddFooter.FirstParagraph;
 			of.Format.HorizontalAlignment = HorizontalAlignment.Right;
 			var ofp = of.AppendField("page number", FieldType.FieldPage);
-			ofp.CharacterFormat.FontName = fontName;
-			ofp.CharacterFormat.FontSize = fontSize;
+			ofp.ApplyCharacterFormat(normal);
 
 			var eh = section.HeadersFooters.EvenHeader.FirstParagraph;
 			eh.Format.HorizontalAlignment = HorizontalAlignment.Left;
 			var eh1 = eh.AppendField("Heading 1", FieldType.FieldStyleRef);
-			eh1.CharacterFormat.FontName = fontName;
-			eh1.CharacterFormat.FontSize = fontSize;
+			eh1.ApplyCharacterFormat(normal);
 			var ehs = eh.AppendText(" ");
-			ehs.CharacterFormat.FontName= fontName;
-			ehs.CharacterFormat.FontSize = fontSize;
+			ehs.ApplyCharacterFormat(normal);
 			var eh4 = eh.AppendField("Heading 4", FieldType.FieldStyleRef);
-			eh4.CharacterFormat.FontName = fontName;
-			eh4.CharacterFormat.FontSize = fontSize;
+			eh4.ApplyCharacterFormat(normal);
 
 			var ef = section.HeadersFooters.EvenFooter.FirstParagraph;
 			ef.Format.HorizontalAlignment = HorizontalAlignment.Left;
 			var efp = ef.AppendField("page number", FieldType.FieldPage);
-			efp.CharacterFormat.FontName = fontName;
-			efp.CharacterFormat.FontSize = fontSize;
+			efp.ApplyCharacterFormat(normal);
 		}
 
 		private void CreateEnding()
