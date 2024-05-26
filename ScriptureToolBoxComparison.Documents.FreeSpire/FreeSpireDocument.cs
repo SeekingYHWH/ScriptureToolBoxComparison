@@ -155,6 +155,10 @@ namespace ScriptureToolBoxComparison
 			paragraph.AppendBreak(BreakType.PageBreak);
 			paragraph = section.AddParagraph();
 			paragraph.AppendBreak(BreakType.PageBreak);
+			paragraph = section.AddParagraph();
+			paragraph.AppendBreak(BreakType.PageBreak);
+			paragraph = section.AddParagraph();
+			paragraph.AppendBreak(BreakType.PageBreak);
 
 			//Table of Contents
 			paragraph = section.AddParagraph();
