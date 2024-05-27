@@ -35,12 +35,13 @@ namespace ScriptureToolBoxComparison
 		private static List<string> ParseCommandLine(string[] args)
 		{
 			var name = "Torah";
-			document = new MultipleDocument(
+			document = new FreeSpireDocument(new XmlDocument().DocumentElement, name + ".docx");
+				//new MultipleDocument(
 				//new GemBoxDocument(new XmlDocument().DocumentElement, name + ".docx"),
-				new FreeSpireDocument(new XmlDocument().DocumentElement, name + ".docx"),
-				new HTMLDocument(new XmlDocument().DocumentElement, name + ".html"),
-				new TextLog(new XmlDocument().DocumentElement, name + ".log"),
-				new XMLLog(new XmlDocument().DocumentElement, name + ".xml"));
+				//new FreeSpireDocument(new XmlDocument().DocumentElement, name + ".docx"),
+				//new HTMLDocument(new XmlDocument().DocumentElement, name + ".html"),
+				//new TextLog(new XmlDocument().DocumentElement, name + ".log"),
+				//new XMLLog(new XmlDocument().DocumentElement, name + ".xml"));
 			pre = "Joseph.config";
 			//source = new WebSource(new Uri("https://scripturetoolbox.com/html/ic/"));
 			source = new FileSource(@"..\..\..\..\Source");
