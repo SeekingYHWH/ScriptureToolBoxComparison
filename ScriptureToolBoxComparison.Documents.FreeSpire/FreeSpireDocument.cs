@@ -18,7 +18,11 @@ namespace ScriptureToolBoxComparison
 		private readonly string path;
 		private Document document;
 		private SizeF pageSize;
-		private MarginsF margins;
+		private float marginsGutter;
+		private float marginsTop;
+		private float marginsBottom;
+		private float marginsLeft;
+		private float marginsRight;
 		private Column[] columns;
 		private string fontName;
 		private float fontSize;
@@ -37,18 +41,18 @@ namespace ScriptureToolBoxComparison
 			document.EmbedFontsInFile = true;
 
 			this.pageSize = PageSize.Letter;
-			this.margins = new MarginsF();
-			margins.Top = 1.0f * 72;
-			margins.Bottom = 1.0f * 72;
-			margins.Left = 1.0f * 72;
-			margins.Right = 1.0f * 72;
+			this.marginsGutter = 0.75f * 72;
+			this.marginsTop = 0.25f * 72;
+			this.marginsBottom = 0.25f * 72;
+			this.marginsLeft = 0.25f * 72;
+			this.marginsRight = 0.25f * 72;
 			this.columns = new Column[]
 			{
-				new Column(document) { Width = 2.17f * 72, Space = 2.16f * 72, },
-				new Column(document) { Width = 2.17f * 72, Space = 2.16f * 72, },
+				new Column(document) { Width = 2.42f * 72, Space = 2.41f * 72, },
+				new Column(document) { Width = 2.42f * 72, Space = 2.41f * 72, },
 			};
-			this.fontName = fontName;
-			this.fontSize = fontSize;
+			this.fontName = "Times New Roman";
+			this.fontSize = 12;
 			this.delete = new CharacterFormat(document) { Bold = false, IsStrikeout = true, DoubleStrike = false, FontName = fontName, FontSize = fontSize, };
 			this.insert = new CharacterFormat(document) { Bold = true, IsStrikeout = false, DoubleStrike = false, FontName = fontName, FontSize = fontSize, };
 			this.normal = new CharacterFormat(document) { Bold = false, IsStrikeout = false, DoubleStrike = false, FontName = fontName, FontSize = fontSize, };
@@ -147,10 +151,9 @@ namespace ScriptureToolBoxComparison
 		{
 			section = document.AddSection();
 			section.BreakCode = SectionBreakType.NewPage;
-			section.PageSetup.PageSize = pageSize;
 
-			//Margins
-			ConfigMargins(section.PageSetup.Margins);
+			//Page
+			ConfigPage(section.PageSetup);
 
 			//Headers
 			section.PageSetup.DifferentOddAndEvenPagesHeaderFooter = true;
@@ -196,11 +199,8 @@ namespace ScriptureToolBoxComparison
 
 		private void ConfigBody()
 		{
-			//Letter
-			section.PageSetup.PageSize = pageSize;
-			
-			//Margins
-			ConfigMargins(section.PageSetup.Margins);
+			//Page
+			ConfigPage(section.PageSetup);
 
 			//Numbers
 			section.PageSetup.RestartPageNumbering = true;
@@ -252,20 +252,22 @@ namespace ScriptureToolBoxComparison
 			section = document.AddSection();
 			section.HeadersFooters.LinkToPrevious = false;
 			section.BreakCode = SectionBreakType.NewPage;
-			section.PageSetup.PageSize = pageSize;
-			//Margins
-			ConfigMargins(section.PageSetup.Margins);
+
+			ConfigPage(section.PageSetup);
 
 			var paragraph = section.AddParagraph();
 			paragraph.AppendBreak(BreakType.PageBreak);
 		}
 
-		private void ConfigMargins(MarginsF margins)
+		private void ConfigPage(PageSetup pageSetup)
 		{
-			margins.Top = this.margins.Top;
-			margins.Bottom = this.margins.Bottom;
-			margins.Left = this.margins.Left;
-			margins.Right = this.margins.Right;
+			pageSetup.PageSize = pageSize;
+			pageSetup.Gutter = marginsGutter;
+			var margins = pageSetup.Margins;
+			margins.Top = marginsTop;
+			margins.Bottom = marginsBottom;
+			margins.Left = marginsLeft;
+			margins.Right = marginsRight;
 		}
 	}
 }
