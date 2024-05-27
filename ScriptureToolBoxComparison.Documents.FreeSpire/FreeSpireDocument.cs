@@ -41,15 +41,15 @@ namespace ScriptureToolBoxComparison
 			document.EmbedFontsInFile = true;
 
 			this.pageSize = PageSize.Letter;
-			this.marginsGutter = 0.75f * 72;
+			this.marginsGutter = 0.50f * 72;
 			this.marginsTop = 0.25f * 72;
 			this.marginsBottom = 0.25f * 72;
-			this.marginsLeft = 0.25f * 72;
-			this.marginsRight = 0.25f * 72;
+			this.marginsLeft = 0.30f * 72;
+			this.marginsRight = 0.30f * 72;
 			this.columns = new Column[]
 			{
-				new Column(document) { Width = 2.42f * 72, Space = 2.41f * 72, },
-				new Column(document) { Width = 2.42f * 72, Space = 2.41f * 72, },
+				new Column(document) { Width = 2.47f * 72, Space = 2.46f * 72, },
+				new Column(document) { Width = 2.47f * 72, Space = 2.46f * 72, },
 			};
 			this.fontName = "Times New Roman";
 			this.fontSize = 12;
