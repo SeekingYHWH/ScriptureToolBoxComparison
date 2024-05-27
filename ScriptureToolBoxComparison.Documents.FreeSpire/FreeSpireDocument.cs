@@ -44,11 +44,11 @@ namespace ScriptureToolBoxComparison
 			margins.Right = 1.0f * 72;
 			this.columns = new Column[]
 			{
-				new Column(document) { Width = 2.33f * 72, Space = 2.33f * 72, },
-				new Column(document) { Width = 2.33f * 72, Space = 2.33f * 72, },
+				new Column(document) { Width = 2.17f * 72, Space = 2.16f * 72, },
+				new Column(document) { Width = 2.17f * 72, Space = 2.16f * 72, },
 			};
-			this.fontName = "Times New Roman";
-			this.fontSize = 12;
+			this.fontName = fontName;
+			this.fontSize = fontSize;
 			this.delete = new CharacterFormat(document) { Bold = false, IsStrikeout = true, DoubleStrike = false, FontName = fontName, FontSize = fontSize, };
 			this.insert = new CharacterFormat(document) { Bold = true, IsStrikeout = false, DoubleStrike = false, FontName = fontName, FontSize = fontSize, };
 			this.normal = new CharacterFormat(document) { Bold = false, IsStrikeout = false, DoubleStrike = false, FontName = fontName, FontSize = fontSize, };
